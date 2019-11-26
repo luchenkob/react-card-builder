@@ -464,6 +464,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         color: $color-dark-gray !important;
         width: 100%;
         height: 100%;
@@ -472,6 +473,19 @@
         font-weight: 400 !important;
         font-style: normal !important;
         font-family: $font-family !important;
+
+        >div {
+          margin-bottom: 20px;
+        }
+
+        span{
+          margin-bottom: 20px;
+        }
+
+        img {
+          width: 40px;
+          margin: 20px;
+        }
       }
     }
 
@@ -495,16 +509,7 @@
         display: flex;
         justify-content: center;
       }
-      > div:not(.cta-special-tooltip) {
-        min-height: 10vh;
-      }
     }
-    .cta-content-text {
-      > div:not(.cta-special-tooltip) {
-        min-height: 10vh;
-      }
-    }
-
     .cta-content-copyright {
       text-align: center;
       font-size: 0.8125rem;
@@ -524,11 +529,6 @@
     }
 
     .cta-content-legal {
-      cursor: pointer;
-      color: $color-dark-gray;
-      border: 2px dashed transparent;
-      border-radius: $input-radius * 2;
-      transition: border $transition ease, background-color $transition ease;
 
       &.filed {
         border-color: transparent;
@@ -540,23 +540,22 @@
       }
 
       .cta-content-unsubscribe {
+        display: block;
         margin-bottom: $margin;
         line-height: 150%;
       }
 
       .cta-legal-toggler {
+        
         color: $color-dark-gray;
-        text-decoration: underline;
         cursor: pointer;
         font-family: $font-family !important;
         font-size: 1rem !important;
-
-        &:hover {
-          text-decoration: none;
-        }
       }
 
       .cta-content-legal-links {
+        display: block !important;
+
         > div {
           line-height: 150%;
         }

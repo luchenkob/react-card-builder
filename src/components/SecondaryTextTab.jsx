@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Select from 'react-select';
 import Pickr from '@simonwep/pickr';
 import { SWATCHES, PICKR_CONFIG } from "../defines";
-import ReactTooltip from 'react-tooltip'
 
 class SecondaryTextTab extends Component {
   constructor(props) {
@@ -75,9 +74,6 @@ class SecondaryTextTab extends Component {
 
     return (
       <div className="cta-tab-content">
-        <div className="cta-group-title">
-          <h2>Secondary Text</h2>
-        </div>
         <div className="cta-tab active">
           <div className="cta-group bb-0">
             <textarea
@@ -119,7 +115,6 @@ class SecondaryTextTab extends Component {
                 <div data-tip="Align left" className={`cta-btn-icon ${data.secondaryReasonAlign == 'left' ? 'active' : ''}`} onClick={() => { data.secondaryReasonAlign = "left"; onUpdate(data) }}>
                   <i className="icon-text-left"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
                 <div data-tip="Align center" className={`cta-btn-icon ${data.secondaryReasonAlign == 'center' ? 'active' : ''}`} onClick={() => { data.secondaryReasonAlign = "center"; onUpdate(data) }}>
                   <i className="icon-text-center"></i>
                 </div>

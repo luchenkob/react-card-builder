@@ -336,53 +336,6 @@
         height: #{$input-lineheight - 0.25rem};
       }
     }
-
-    .cta-select__menu {
-      z-index: 12;
-      border-radius: $input-radius*2;
-      @include shadow($shadow);
-
-      .cta-select__menu-list {
-        .cta-select__option {
-          display: flex;
-          align-items: center;
-
-          i {
-            color: $color-additional;
-            margin-right: 1rem;
-            display: flex;
-            align-items: center;
-          }
-
-          &.cta-select__option--is-selected {
-            background-color: transparent;
-            color: inherit;
-            position: relative;
-
-            &::after{
-              content: '\e917';
-              @include iconmoon();
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              right: 1rem;
-              font-size: 0.6rem;
-            }
-
-            i {
-              color: inherit;
-            }
-
-            &.cta-select__option--is-focused {
-              background-color: rgba($color-primary, 0.1);
-            }
-          }
-          &.cta-select__option--is-focused {
-            background-color: rgba($color-primary, 0.1);
-          }
-        }
-      }
-    }
   }
 
   .cta-color-input {
@@ -528,3 +481,54 @@
   }
 }
 
+body > [class^="css-"] {
+  z-index: 22;
+}
+
+.cta-select__menu {
+  z-index: 12;
+  font-family: $font-family;
+  border-radius: $input-radius*2;
+  @include shadow($shadow);
+
+  .cta-select__menu-list {
+    .cta-select__option {
+      display: flex;
+      align-items: center;
+
+      i {
+        color: $color-additional;
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      &.cta-select__option--is-selected {
+        background-color: transparent;
+        color: inherit;
+        position: relative;
+
+        &::after{
+          content: '\e917';
+          @include iconmoon();
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 1rem;
+          font-size: 0.6rem;
+        }
+
+        i {
+          color: inherit;
+        }
+
+        &.cta-select__option--is-focused {
+          background-color: rgba($color-primary, 0.1);
+        }
+      }
+      &.cta-select__option--is-focused {
+        background-color: rgba($color-primary, 0.1);
+      }
+    }
+  }
+}

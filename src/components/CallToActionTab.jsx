@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Select from 'react-select';
 import Pickr from '@simonwep/pickr';
 import { SWATCHES, PICKR_CONFIG } from "../defines";
-import ReactTooltip from 'react-tooltip'
 
 class CallToActionTab extends Component {
   constructor(props) {
@@ -71,13 +70,10 @@ class CallToActionTab extends Component {
 
   render() {
 
-    const { fontsList, data, onUpdate } = this.props;
+    const { fontsList, data, onUpdate  } = this.props;
 
     return (
       <div className="cta-tab-content">
-        <div className="cta-group-title">
-          <h2>Call-to-action text</h2>
-        </div>
         <div className="cta-tab active">
           <div className="cta-group bb-0">
             <textarea
@@ -93,6 +89,8 @@ class CallToActionTab extends Component {
               options={fontsList}
               className={"cta-select"}
               classNamePrefix={"cta-select"}
+              closeMenuOnScroll={(e) => e.target && !(typeof e.target.classList != "undefined" ? e.target.classList.contains("cta-select__menu-list") : true)}
+              menuPortalTarget={document.body}
             />
             <div className="cta-inline">
               <div>
@@ -119,7 +117,6 @@ class CallToActionTab extends Component {
                 <div data-tip="Align left" className={`cta-btn-icon ${data.reasonAlign == 'left' ? 'active' : ''}`} onClick={() => { data.reasonAlign = "left"; onUpdate(data) }}>
                   <i className="icon-text-left"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
                 <div data-tip="Align center" className={`cta-btn-icon ${data.reasonAlign == 'center' ? 'active' : ''}`} onClick={() => { data.reasonAlign = "center"; onUpdate(data) }}>
                   <i className="icon-text-center"></i>
                 </div>

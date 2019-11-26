@@ -5,7 +5,6 @@ import { SWATCHES, PICKR_CONFIG, BUTTONS_TYPES } from "../defines";
 import ShadowList from "./ShadowList";
 import IconsSelect from "./IconsSelect";
 import { customSingleValue, customOptionValue } from "./UiComponents";
-import ReactTooltip from 'react-tooltip';
 
 class MainButtonTab extends Component {
   constructor(props) {
@@ -176,7 +175,6 @@ class MainButtonTab extends Component {
   }
 
   onIconChoose = (value) => {
-    console.log(value);
     const { data, onUpdate } = this.props;
     data.mainButtonIcon = value;
 
@@ -191,7 +189,6 @@ class MainButtonTab extends Component {
     return (
       <div className="cta-tab-content">
         <div className="cta-group-title">
-          <h2>Main button</h2>
           <div className="cta-links in-tab">
             <div className={`cta-link ${tab == "setup" ? 'active' : ''}`} onClick={() => { this.onTabChange("setup") }}>Setup</div>
             <div className={`cta-link ${tab == "styling" ? 'active' : ''}`} onClick={() => { this.onTabChange("styling") }}>Styling</div>
@@ -244,7 +241,7 @@ class MainButtonTab extends Component {
                 </div>
               </div>
               <div>
-                <label>Stroke color</label>
+                <label>Border color</label>
                 <div className="cta-color-input">
                   <div className="color-picker" ref={this.strColorPickr}></div>
                   <input type="text" value={data.mainButtonStroke} onChange={this.onChangeStroke} placeholder="None" />
@@ -296,7 +293,6 @@ class MainButtonTab extends Component {
                 <div data-tip="Align left" className={`cta-btn-icon ${data.mainButtonAlign == 'left' ? 'active' : ''}`} onClick={() => { data.mainButtonAlign = "left"; onUpdate(data) }}>
                   <i className="icon-text-left"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
                 <div data-tip="Align center" className={`cta-btn-icon ${data.mainButtonAlign == 'center' ? 'active' : ''}`} onClick={() => { data.mainButtonAlign = "center"; onUpdate(data) }}>
                   <i className="icon-text-center"></i>
                 </div>

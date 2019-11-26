@@ -3,7 +3,6 @@ import Select from 'react-select';
 import Pickr from '@simonwep/pickr';
 import { SWATCHES, PICKR_CONFIG } from "../defines";
 import Counter from "./Counter";
-import ReactTooltip from 'react-tooltip';
 import { validateEmail, validURL } from '../utils/utils';
 
 class ComplianceTab extends Component {
@@ -113,7 +112,6 @@ class ComplianceTab extends Component {
     return (
       <div className="cta-tab-content">
         <div className="cta-group-title">
-          <h2>Compliance</h2>
           <div className="cta-links in-tab">
             <div className={`cta-link ${tab == "settings" ? 'active' : ''}`} onClick={() => { this.onTabChange("settings") }}>Settings</div>
             <div className={`cta-link ${tab == "styling" ? 'active' : ''}`} onClick={() => { this.onTabChange("styling") }}>Styling</div>
@@ -191,7 +189,7 @@ class ComplianceTab extends Component {
                 <div data-tip="Align left" className={`cta-btn-icon ${data.complianceAlign == 'left' ? 'active' : ''}`} onClick={() => { data.complianceAlign = "left"; onUpdate(data) }}>
                   <i className="icon-text-left"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
+                
                 <div data-tip="Align center" className={`cta-btn-icon ${data.complianceAlign == 'center' ? 'active' : ''}`} onClick={() => { data.complianceAlign = "center"; onUpdate(data) }}>
                   <i className="icon-text-center"></i>
                 </div>

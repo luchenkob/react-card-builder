@@ -99,19 +99,19 @@ class Design extends Component {
           <div className={`cta-content active ${this.ifTriggerButton() ? "d-none" : ''}`} style={{ width: data.width + "px", background: data.background, border: data.stroke ? data.stroke : "none", borderRadius: data.corner + "px", borderColor: data.stroke, boxShadow: data.shadow }}>
             <div className={`cta-content-close ${this.ifOnlyImage() ? "d-none" : ''} ${data.closePosition}`}><i className="icon-close"></i></div>
             <div className={`cta-block cta-content-logo ${data.logo && data.logo != "http://" && data.logo != "https://" ? "filed" : ''} ${data.logoAlign} ${data.logoStyle}`} onClick={() => { this.navigateToTab("isLogoTab") }}>
-              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank"><img style={{ width: data.logoMaxWidth + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
+              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank"><img style={{ width: data.logoMaxWidth + "px" }} src={data.logo} /></a> : <div><img src="./assets/img/logo-section.svg" /> <div>Logo <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`cta-blocks ${data.imageAlign} ${data.imageStyle}`}>
               <div className={`cta-block cta-content-image ${data.image && data.image != "http://" && data.image != "https://" ? "filed" : ''} ${data.imageAlign} ${data.imageStyle}`} onClick={() => { this.navigateToTab("isFeaturedImageTab") }}>
-                {data.image && data.image != "http://" && data.image != "https://" ? <img src={data.image} style={{ width: data.imageWidth + "px" }} /> : <div><div>Header image <span className="cta-optional">(optional)</span></div></div>}
+                {data.image && data.image != "http://" && data.image != "https://" ? <img src={data.image} style={{ width: data.imageWidth + "px" }} /> : <div><img src="./assets/img/hero-section.svg" /><div>Hero image <span className="cta-optional">(optional)</span></div></div>}
               </div>
               <div className={`cta-block cta-content-text ${data.reason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isCallToActionTab") }} style={{ fontSize: data.size + "px", fontFamily: data.font, color: data.color, fontWeight: data.reasonWeight, fontStyle: data.reasonItalic, textAlign: data.reasonAlign }}>
                 <ToolTip isActive={isDesign && toolTips.isCallToActionTooltip} text="Click the text block to edit the dummy content." type="left" />
-                {data.reason.length > 0 ? data.reason : <div><div>Add Call to action text</div></div>}
+                {data.reason.length > 0 ? data.reason : <div><img src="./assets/img/call-text-section.svg" /><div>Call to action text</div></div>}
               </div>
             </div>
             <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isSecondaryTextTab") }} style={{ fontSize: data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
-              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><div>Add Secondary text <span className="cta-optional">(optional)</span></div></div>}
+              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div style={{ textAlign: data.mainButtonAlign }}>
               {
@@ -137,7 +137,7 @@ class Design extends Component {
               }
 
             </div>
-            <div className={`cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} onClick={() => { this.navigateToTab("isComplianceTab") }} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
+            <div className={`cta-block cta-content-text cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} onClick={() => { this.navigateToTab("isComplianceTab") }} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
               {(data.privacy && data.terms) || (data.company && data.email) ?
                 <div className="cta-content-unsubscribe">
                   Reply STOP to unsubscribe or HELP for help. Estim. {data.estimated} msgs/month. Msg&Data rates may apply.
@@ -147,7 +147,7 @@ class Design extends Component {
               {data.customPrivacy ?
                 (data.privacy && data.terms) ? <div className={`cta-content-legal-links ${!validURL(data.privacy) || !validURL(data.terms) ? "disabled" : ''}`}><a target="_blank" href={data.privacy}>Privacy Policy</a> <a target="_blank" href={data.terms}>Terms & Conditions</a></div> : <div className="cta-legal-toggler">Setup legal footnote</div>
                 :
-                (data.company && data.email) ? this.generateLink() : <div className="cta-legal-toggler"><span>Setup legal footnote</span></div>
+                (data.company && data.email) ? this.generateLink() : <div className="cta-legal-toggler"><img src="./assets/img/sec-text-section.svg" /><span>Legal footnote</span></div>
               }
             </div>
             {data.isPowered ? (<div className="cta-content-copyright"><a target="_blank">Powered by SimpleTexting.com</a></div>) : ''}

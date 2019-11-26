@@ -21,6 +21,7 @@ import LightPreview from "../components/LightPreview";
 import { validateEmail, validURL } from '../utils/utils';
 import shortLinks from "../services/shortLinks";
 import { LAYOUT_NAMES, APP_CONFIG, getInitialData } from "../defines";
+import ReactTooltip from 'react-tooltip';
 
 class CtaBuilder extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class CtaBuilder extends Component {
 
     this.state = {
       isLayoutChoose: false,
+      isTabsActive: window.innerWidth > 991 ? true : false,
       isMinimal: false,
       isSidebar: true,
       isSocialShare: false,
@@ -323,17 +325,17 @@ class CtaBuilder extends Component {
   };
 
   onLayoutChoose = (layout) => {
-    const {data} = this.state;
+    const { data } = this.state;
 
     switch (LAYOUT_NAMES[layout]) {
       case LAYOUT_NAMES[0]:
-          window.history.pushState({},"", data.folder+"#image-only");
+        window.history.pushState({}, "", data.folder + "#image-only");
         break;
       case LAYOUT_NAMES[1]:
-          window.history.pushState({},"", data.folder+"#button-flyout");
+        window.history.pushState({}, "", data.folder + "#button-flyout");
         break;
       case LAYOUT_NAMES[2]:
-          window.history.pushState({},"", data.folder+"#click-to-text");
+        window.history.pushState({}, "", data.folder + "#click-to-text");
         break;
       default:
 
@@ -345,8 +347,13 @@ class CtaBuilder extends Component {
   }
 
   onViewChange = (is) => {
-    this.onCloseTabs();
-    if (!is) this.setTooltip("isPreviewTooltip");
+    
+    if (!is) {
+      this.onCloseTabs();
+      this.setTooltip("isPreviewTooltip");
+    }else{
+      this.onShowTabs();
+    } 
     this.setState({ isDesign: is });
   }
 
@@ -373,7 +380,7 @@ class CtaBuilder extends Component {
     if (tabs.isCallToActionTab) this.setTooltip("isCallToActionTooltip");
     if (tabs.isSecondaryTextTab) this.setTooltip("isSecondaryTextTooltip");
     if (tabs.isMainButtonTab) this.setTooltip("isMainButtonTooltip");
-    this.setState({ tabs });
+    this.setState({isTabsActive:true, tabs });
   }
 
   onCloseSidebar = () => {
@@ -436,10 +443,28 @@ class CtaBuilder extends Component {
 
   clearInputs = () => {
     let textareas = document.querySelectorAll("textarea");
-    textareas.forEach((textarea)=>{
+    textareas.forEach((textarea) => {
       textarea.value = '';
     });
     this.setState({ data: getInitialData() });
+  }
+
+  toggle = (name) => {
+    const { tabs } = this.state;
+
+    tabs[name] = !tabs[name];
+    this.setState({ tabs: tabs });
+  }
+
+  onCloseTabs = () => {
+    this.setState({isTabsActive:false});
+  }
+
+  onShowTabs = () => {
+    setTimeout(()=>{
+      this.setState({isTabsActive:true});
+    }, 100);
+    
   }
 
   render() {
@@ -455,7 +480,9 @@ class CtaBuilder extends Component {
       isSidebar,
       isSocialShare,
       isExportTab,
-      toolTips
+      toolTips,
+      isMenuOpen,
+      isTabsActive 
     } = this.state;
 
     return (
@@ -483,67 +510,72 @@ class CtaBuilder extends Component {
           /> */}
           <Design setTooltip={this.setTooltip} clearInputs={this.clearInputs} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={isDesign} />
           <Preview onDontShow={() => { }} onRemindLater={() => { }} setTooltip={this.setTooltip} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={!isDesign} />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isCallToActionTab} content={
-            <CallToActionTab
-              data={data}
-              fontsList={fontsList}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isSecondaryTextTab} content={
-            <SecondaryTextTab
-              data={data}
-              fontsList={fontsList}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isComplianceTab} content={
-            <ComplianceTab
-              data={data}
-              fontsList={fontsList}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isBackgroundTab} content={
-            <BackgroundTab
-              data={data}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isLogoTab} content={
-            <LogoTab
-              data={data}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isFeaturedImageTab} content={
-            <FeaturedImageTab
-              data={data}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isMainButtonTab} content={
-            <MainButtonTab
-              data={data}
-              fontsList={fontsList}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isTriggerButtonTab} content={
-            <TriggerButtonTab
-              data={data}
-              behavior={behavior}
-              fontsList={fontsList}
-              onUpdateB={this.onBehaviorUpdate}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
-          <EditTab onClose={this.onCloseTabs} isActive={tabs.isContactUsButtonTab} content={
-            <ContactUsButtonTab
-              data={data}
-              behavior={behavior}
-              fontsList={fontsList}
-              onUpdateB={this.onBehaviorUpdate}
-              onFontchange={this.onFontchange}
-              onUpdate={this.onUpdate} />
-          } />
+          <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
+          <div className={`cta-tabs ${isTabsActive ? 'active' : ''}`}>
+            <div className="cta-tabs-close" onClick={this.onCloseTabs}><i className="icon-close"></i></div>
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Card styling" content={
+              <BackgroundTab
+                data={data}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isTriggerButtonTab} toggle={this.toggle} name="isTriggerButtonTab" title="Trigger button" content={
+              <TriggerButtonTab
+                data={data}
+                behavior={behavior}
+                fontsList={fontsList}
+                onUpdateB={this.onBehaviorUpdate}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isLogoTab} toggle={this.toggle} name="isLogoTab" title="Logo" content={
+              <LogoTab
+                data={data}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isFeaturedImageTab} toggle={this.toggle} name="isFeaturedImageTab" title="Hero image" content={
+              <FeaturedImageTab
+                data={data}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isCallToActionTab} toggle={this.toggle} name="isCallToActionTab" title="Call-to-action text" content={
+              <CallToActionTab
+                data={data}
+                fontsList={fontsList}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate}
+              />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary Text" content={
+              <SecondaryTextTab
+                data={data}
+                fontsList={fontsList}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isContactUsButtonTab} toggle={this.toggle} name="isContactUsButtonTab" title="Click-to-text button" content={
+              <ContactUsButtonTab
+                data={data}
+                behavior={behavior}
+                fontsList={fontsList}
+                onUpdateB={this.onBehaviorUpdate}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isMainButtonTab} toggle={this.toggle} name="isMainButtonTab" title="Main button" content={
+              <MainButtonTab
+                data={data}
+                fontsList={fontsList}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate} />
+            } />
+            <EditTab onClose={this.onCloseTabs} isActive={tabs.isComplianceTab} toggle={this.toggle} name="isComplianceTab" title="Legal footer" content={
+              <ComplianceTab
+                data={data}
+                fontsList={fontsList}
+                onFontchange={this.onFontchange}
+                onUpdate={this.onUpdate} />
+            } />
+          </div>
         </div>
         <Modal isOpen={isLayoutChoose} overlayClose={false} onClose={this.onLayoutChooseClose} type="cta-modal-cm" content={<LayoutChoose onLayoutChoose={this.onLayoutChoose} />} />
         <Modal isOpen={isSocialShare} overlayClose={true} onClose={this.onSocialShareClose} content={<SocialShare />} />

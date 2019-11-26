@@ -1,19 +1,117 @@
-.cta-edittab{
+.cta-tabs {
   position: absolute;
-  right: 0;
-  top: 0;
+  z-index: 10;
   width: $edittab-width;
-  height: 100%;
-  padding: 2em 0;
+  left: $edittab-spacer * 2;
+  top: $edittab-spacer * 2;
+  height: calc(100% - #{$edittab-spacer * 4});
+  background-color: $color-white;
+  padding: $edittab-spacer/2 0;
+  border-radius: $input-radius * 4;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateX(-140%);
+  transition: transform $transition ease;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  .cta-tabs-close {
+    align-items: center;
+    position: absolute;
+    right: $spacer/2;
+    top: 24px;
+    font-size: 0.7rem;
+    height: 1.4rem;
+    cursor: pointer;
+    color: $color-dark;
+    transition: color $transition ease;
+    display: none;
+
+    &:hover {
+      color: $color-dark;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .cta-tabs-close {
+      display: block;
+    }
+  }
+}
+.cta-edittab {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: stretch;
   align-items: center;
-  background-color: $color-white;
+  border-radius: $input-radius * 4;
+  width: 100%;
+  height: auto;
+  max-height: 50px;
+  padding: $edittab-spacer/2 0;
   z-index: 13;
-  transform: translateX(100%);
-  transition: transform $transition ease;
+  transition: max-height $transition * 2 ease;
+
+  &.active {
+    max-height: calc(100vh + 60px);
+
+    .cta-edittab-toggler {
+      background-color: transparent;
+      .cta-edittab-arrow {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  .cta-edittab-toggler {
+    font-size: 1em;
+    font-weight: 600;
+    width: calc(100% - #{$edittab-spacer * 2});
+    background-color: $color-sgray;
+    margin: 0 auto;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    border-radius: $input-radius * 2;
+    padding: 0 1rem;
+    height: 40px;
+    cursor: pointer;
+    transition: all $transition ease;
+
+    &:hover {
+      background-color: $color-lgray;
+    }
+
+    .cta-edittab-arrow {
+      font-size: 0.5rem;
+      margin-right: 0.5rem;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+      color: $color-dark-gray;
+      transition: transform $transition/2 ease;
+    }
+  }
+
+  .cta-edittab-content {
+    width: calc(100% + #{$edittab-spacer});
+    margin-left: #{$edittab-spacer};
+    overflow-y: scroll;
+  }
 
   .cta-edit-tab-close {
     align-items: center;
@@ -27,37 +125,38 @@
     transition: color $transition ease;
     display: none;
 
-    &:hover{
+    &:hover {
       color: $color-dark;
     }
   }
 
   .cta-tab-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    height: 100%;
+    padding: 0 $edittab-spacer;
+    padding-top: $spacer;
+    max-height: 100vh;
     width: 100%;
   }
 
+  .cta-group-title {
+    width: calc(100% + #{$edittab-spacer * 2});
+    margin-left: -$edittab-spacer;
+    padding: 0;
+  }
+
   .cta-group {
-    width: 100%;
-    padding: 0 $spacer;
+    width: calc(100% + #{$edittab-spacer * 2});
+    margin-left: -$edittab-spacer;
+    padding: 0 $edittab-spacer * 2;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     border-bottom: 1px solid $border-color;
     margin-bottom: $margin;
   }
-  
+
   .cta-tab {
-    width: calc(100% + #{$spacer} + 12px);
-    margin-left: -$spacer/2;
-    padding: 0 $spacer/2;
     display: none;
-    height: 100%;
-    overflow-y: scroll;
-  
+
     &.active {
       display: block;
     }
@@ -74,7 +173,7 @@
     }
   }
 
-  &.active{
+  &.active {
     transform: translateX(0);
   }
 
@@ -84,13 +183,12 @@
 
   @media screen and (max-width: $lg) {
     .cta-edit-tab-close {
-      display: flex;
+      display: none;
     }
   }
 
   @media screen and (max-width: 991px) {
     width: $edittab-width-mobile;
-    padding: 2em 0;
   }
 
   @media screen and (max-width: 560px) {
@@ -103,26 +201,14 @@
     }
 
     .cta-group-title {
-
       h2 {
         padding: 0 1rem;
       }
     }
-
-    .cta-group {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-
-    .cta-tab {
-      width: calc(100% + 2rem + 12px);
-      margin-left: -1rem;
-      padding: 0 1rem;
-    }
   }
 }
 
-.cta-tab-static{
+.cta-tab-static {
   width: 100%;
   height: 100%;
   padding: 2em 0;
@@ -147,7 +233,7 @@
     transition: color $transition ease;
     display: none;
 
-    &:hover{
+    &:hover {
       color: $color-dark;
     }
   }
@@ -169,7 +255,7 @@
     border-bottom: 1px solid $border-color;
     margin-bottom: $margin;
   }
-  
+
   .cta-tab {
     width: calc(100% + #{$spacer} + 12px);
     margin-left: -$spacer/2;
@@ -181,7 +267,7 @@
     &.fixed {
       overflow-y: hidden;
     }
-  
+
     &.active {
       display: block;
     }
@@ -208,7 +294,6 @@
     }
 
     .cta-group-title {
-
       h2 {
         padding: 0 1rem;
       }

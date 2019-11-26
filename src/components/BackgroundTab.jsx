@@ -126,9 +126,6 @@ class BackgroundTab extends Component {
 
     return (
       <div className="cta-tab-content">
-        <div className="cta-group-title">
-          <h2>Background card</h2>
-        </div>
         <div className="cta-tab active">
           <div className="cta-group bb-0">
             <div className="cta-inline">
@@ -140,7 +137,7 @@ class BackgroundTab extends Component {
                 </div>
               </div>
               <div>
-                <label>Stroke color</label>
+                <label>Border color</label>
                 <div className="cta-color-input">
                   <div className="color-picker" ref={this.strColorPickr}></div>
                   <input type="text" value={data.stroke} onChange={this.onChangeStroke} placeholder="None" />

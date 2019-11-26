@@ -5,7 +5,6 @@ import { SWATCHES, PICKR_CONFIG, BUTTONS_TYPES, BEHAVIOR_POSITIONS } from "../de
 import ShadowList from "./ShadowList";
 import IconsSelect from "./IconsSelect";
 import { customSingleValue, customOptionValue } from "./UiComponents";
-import ReactTooltip from 'react-tooltip';
 
 class ContactUsButtonTab extends Component {
   constructor(props) {
@@ -200,7 +199,6 @@ class ContactUsButtonTab extends Component {
     return (
       <div className="cta-tab-content">
         <div className="cta-group-title">
-          <h2>Click-to-text button</h2>
           <div className="cta-links in-tab">
             <div className={`cta-link ${tab == "settings" ? 'active' : ''}`} onClick={() => { this.onTabChange("settings") }}>Settings</div>
             <div className={`cta-link ${tab == "styling" ? 'active' : ''}`} onClick={() => { this.onTabChange("styling") }}>Styling</div>
@@ -277,7 +275,7 @@ class ContactUsButtonTab extends Component {
                 </div>
               </div>
               <div>
-                <label>Stroke color</label>
+                <label>Border color</label>
                 <div className="cta-color-input">
                   <div className="color-picker" ref={this.strColorPickr}></div>
                   <input type="text" value={data.textUsButtonStroke} onChange={this.onChangeStroke} placeholder="None" />
@@ -330,7 +328,6 @@ class ContactUsButtonTab extends Component {
                 <div data-tip="Align left" className={`cta-btn-icon ${data.textUsButtonAlign == 'left' ? 'active' : ''}`} onClick={() => { data.textUsButtonAlign = "left"; onUpdate(data) }}>
                   <i className="icon-text-left"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
                 <div data-tip="Align center" className={`cta-btn-icon ${data.textUsButtonAlign == 'center' ? 'active' : ''}`} onClick={() => { data.textUsButtonAlign = "center"; onUpdate(data) }}>
                   <i className="icon-text-center"></i>
                 </div>

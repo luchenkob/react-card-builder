@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactTooltip from 'react-tooltip';
 
 class LogoTab extends Component {
   constructor(props) {
@@ -28,9 +27,6 @@ class LogoTab extends Component {
 
     return (
       <div className="cta-tab-content">
-        <div className="cta-group-title">
-          <h2>Logo</h2>
-        </div>
         <div className="cta-tab active">
           <div className="cta-group bb-0">
             <div className="cta-info"><i className="icon-info-outline"></i><span>Currently we don’t support image upload. Instead, insert the link to your image below.</span></div>
@@ -54,7 +50,6 @@ class LogoTab extends Component {
                 <div data-tip="Align full width" className={`cta-btn-icon ${data.logoStyle == 'full-width' ? 'active' : ''}`} onClick={() => { data.logoStyle = "full-width"; onUpdate(data) }}>
                   <i className="icon-full-width"></i>
                 </div>
-                <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
                 <div data-tip="Align boxed" className={`cta-btn-icon ${data.logoStyle == 'boxed' ? 'active' : ''}`} onClick={() => { data.logoStyle = "boxed"; onUpdate(data) }}>
                   <i className="icon-boxed"></i>
                 </div>
