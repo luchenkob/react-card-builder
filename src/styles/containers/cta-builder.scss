@@ -7,6 +7,28 @@
   height: 100vh;
   overflow: hidden;
 
+  .cta-logo {
+    max-width: 140px;
+  }
+
+  .cta-copyright {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    bottom: 20px;
+    font-size: 0.8125rem;
+    color: $color-light-gray;
+
+    a {
+      color: inherit;
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -231,6 +253,13 @@
       margin: 0 auto;
       margin-bottom: 1rem;
       color: $color-dark-gray;
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    .cta-logo {
+      max-width: 100px;
+      margin-left:8px;
     }
   }
 }

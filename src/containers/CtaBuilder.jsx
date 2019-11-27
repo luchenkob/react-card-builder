@@ -73,7 +73,7 @@ class CtaBuilder extends Component {
         bottom: 32,
         left: 32,
         right: 32,
-        autoOpen: false,
+        autoOpen: true,
         delay: 1000,
       },
       data: {
@@ -153,7 +153,7 @@ class CtaBuilder extends Component {
         triggerButtonShadow: '0px 16px 64px rgba(0,0,0,0.08)',
         triggerButtonCorner: 8,
         triggerButtonStroke: "#e0e3e9",
-        triggerButtonBackground: "transparent",
+        triggerButtonBackground: "#eff3f6",
         triggerButtonLabel: "",
         triggerButtonType: "cta-label-textonly",
         triggerButtonIcon: "",
@@ -512,6 +512,10 @@ class CtaBuilder extends Component {
 
   }
 
+  chooseTemplate = (i) => {
+    this.setState({data:TEMPLATES[i]})
+  }
+
   render() {
     const {
       isLayoutChoose,
@@ -527,7 +531,7 @@ class CtaBuilder extends Component {
       isExportTab,
       toolTips,
       isMenuOpen,
-      isTabsActive
+      isTabsActive,
     } = this.state;
 
     return (
@@ -559,7 +563,7 @@ class CtaBuilder extends Component {
           <div className={`cta-tabs ${isTabsActive ? 'active' : ''}`}>
             <div className="cta-tabs-close" onClick={this.onCloseTabsContainer}><i className="icon-close"></i></div>
             <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isTemplatesTab} toggle={this.toggle} name="isTemplatesTab" title="Start with Template" content={
-              <TemplatesTab behavior={behavior}/>
+              <TemplatesTab behavior={behavior} chooseTemplate={this.chooseTemplate}/>
             } />
             <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Card styling" content={
               <BackgroundTab
@@ -628,6 +632,7 @@ class CtaBuilder extends Component {
         <Modal isOpen={isLayoutChoose} overlayClose={false} onClose={this.onLayoutChooseClose} type="cta-modal-cm" content={<LayoutChoose onLayoutChoose={this.onLayoutChoose} />} />
         <Modal isOpen={isSocialShare} overlayClose={true} onClose={this.onSocialShareClose} content={<SocialShare />} />
         <Modal isOpen={isExportTab} overlayClose={true} close={true} onClose={this.onExportTabClose} type="cta-modal-tab" content={<ExportTab modal={this.modal} isExportTab={isExportTab} data={data} behavior={behavior} layoutName={layoutName} preview={<LightPreview modal={this.modal} isDesign={isDesign} behavior={behavior} layoutName={layoutName} data={data} isActive={!isDesign} />} />} />
+        <div className="cta-copyright">© Copyright 2019  <a href="https://simpletexting.com/" target="_blank">SimpleTexting.com</a>. All rights reserved. </div>
       </div>
     );
   }

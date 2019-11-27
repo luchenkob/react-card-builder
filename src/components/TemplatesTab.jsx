@@ -14,22 +14,23 @@ class TemplatesTab extends Component {
 
   render() {
 
-    const { behavior} = this.props;
+    const { behavior, chooseTemplate } = this.props;
 
     return (
       <div className="cta-tab-content">
         <div className="cta-tab active">
           <div className="cta-group bb-0">
             {TEMPLATES.map((template, i) => (
-              <LightPreview
-                isTemplate={true}
-                key={`tmpl-`+i}
-                modal={this.modal}
-                isDesign={false}
-                behavior={behavior}
-                layoutName={LAYOUT_NAMES[0]}
-                data={template}
-                isActive={true} />
+              <div className="mb-2" key={`tmpl-` + i} onClick={() => { chooseTemplate(i) }}>
+                <LightPreview
+                  isTemplate={true}
+                  modal={this.modal}
+                  isDesign={false}
+                  behavior={behavior}
+                  layoutName={LAYOUT_NAMES[0]}
+                  data={template}
+                  isActive={true} />
+              </div>
             ))}
           </div>
         </div>

@@ -173,7 +173,7 @@ class LightPreview extends Component {
           >
             <div className={`cta-content-close ${this.ifOnlyImage() ? "d-none" : ''} ${data.closePosition}`} onClick={this.onClose}><i className="icon-close"></i></div>
             <div className={`cta-block cta-content-logo ${isTemplate ? "pointer-none" : ''} ${data.logo && data.logo != "http://" && data.logo != "https://" ? "filed" : ''} ${data.logoAlign} ${data.logoStyle}`}>
-              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank" href={data.hyperlink ? data.hyperlink : "#"}><img style={{ width: isTemplate ? data.logoMaxWidth*0.7 : isTemplate + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
+              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank" href={data.hyperlink ? data.hyperlink : "#"}><img style={{ width: isTemplate ? data.logoMaxWidth*0.7 : data.logoMaxWidth + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`cta-blocks ${data.imageAlign} ${data.imageStyle}`}>
               <div className={`cta-block cta-content-image ${data.image && data.image != "http://" && data.image != "https://" ? "filed" : ''} ${data.imageAlign} ${data.imageStyle}`}>
@@ -183,7 +183,7 @@ class LightPreview extends Component {
                 {data.reason.length > 0 ? data.reason : <div><div>Add Call to action text</div></div>}
               </div>
             </div>
-            <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isSecondaryTextTab") }} style={{ fontSize: isTemplate ? data.secondarySize*0.7 : data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
+            <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} style={{ fontSize: isTemplate ? data.secondarySize*0.7 : data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
               {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`${isDesktop ? "d-none" : ''}`} style={{ textAlign: data.mainButtonAlign }}>
@@ -221,7 +221,7 @@ class LightPreview extends Component {
                 }
               </div>)
             }
-            {data.isPowered ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
+            {data.isPowered && !isTemplate ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
           </div>
           <div className={`cta-trigger-button-container ${behavior.position}`}>
             <div className={`cta-btn-close cta-dropdown-toggler ${!this.ifTriggerAvailable() ? "d-none" : ''} ${this.ifOnlyImage() ? 'd-none' : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>

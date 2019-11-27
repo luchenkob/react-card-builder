@@ -228,7 +228,6 @@
       justify-content: center;
       text-align: center;
       color: $color-dark-gray;
-      text-decoration: underline;
       transition: border $transition ease, color $transition ease, background-color $transition ease;
 
       &:hover {
@@ -270,6 +269,7 @@
 
     .cta-content-container {
       margin: 5rem 0;
+      margin-bottom: 8rem;
       position: static;
       transform: translateX(0) translateY(0);
     }
@@ -584,6 +584,9 @@
   }
 
   &.preview {
+    .cta-copyright {
+      display: none;
+    }
     &.template {
       height: auto;
       margin-bottom: 2rem;
@@ -591,6 +594,7 @@
 
       *{
         cursor: pointer !important;
+        user-select: none;
       }
 
       .cta-content {
@@ -687,6 +691,7 @@
 
     .cta-content-container {
       margin: 5rem 0;
+      margin-bottom: 8rem;
       position: static;
       transform: translateX(0) translateY(0);
     }
