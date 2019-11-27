@@ -33,6 +33,7 @@
     color: $color-dark-gray;
     transition: color $transition ease;
     display: flex;
+    display: none;
     align-items: center;
     cursor: pointer;
 
@@ -583,6 +584,38 @@
   }
 
   &.preview {
+    &.template {
+      height: auto;
+      margin-bottom: 2rem;
+      cursor: pointer;
+
+      *{
+        cursor: pointer !important;
+      }
+
+      .cta-content {
+        border: 1px solid $color-white !important;
+        transition: border-color $transition ease;
+      }
+
+
+      .cta-content {
+        &:hover{
+          border: 1px solid $color-sgray !important;
+        }
+      }
+
+      &:last-child{
+        margin-bottom: 0;
+      }
+
+      .cta-content-container{
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: translateX(0) translateY(0);
+      }
+    }
     .cta-content {
       overflow: hidden;
 
@@ -647,6 +680,10 @@
   @media screen and (max-width: $md) {
     overflow: auto;
     align-items: flex-start;
+
+    .cta-design-edit {
+      display: block;
+    }
 
     .cta-content-container {
       margin: 5rem 0;

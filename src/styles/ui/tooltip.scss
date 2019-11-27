@@ -99,6 +99,8 @@
   opacity: 0;
   color: $color-dark-gray;
   font-size: 0.8125rem;
+  font-style: normal !important;
+  font-weight: normal !important;
   letter-spacing: 0.2px;
   transition: opacity $transition ease;
 

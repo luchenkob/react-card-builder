@@ -74,16 +74,6 @@ class LightPreview extends Component {
     }
   }
 
-  navigateToTab = (name) => {
-    const { onUpdateTabs, tabs } = this.props;
-
-    for (let i in tabs) {
-      tabs[i] = false;
-      if (i == name) tabs[i] = true;
-    }
-    onUpdateTabs(tabs);
-  }
-
   ifOnlyImage = () => {
     const { layoutName } = this.props;
     return layoutName == LAYOUT_NAMES[0];
@@ -126,8 +116,8 @@ class LightPreview extends Component {
   }
 
   generateLink = () => {
-    const {data} = this.props;
-    
+    const { data } = this.props;
+
     let pdata = this.b64EncodeUnicode(JSON.stringify({ email: data.email, company: data.company }));
     let url = null;
 
@@ -137,7 +127,7 @@ class LightPreview extends Component {
   }
 
   generateTPLinks = () => {
-    const {data} = this.props;
+    const { data } = this.props;
 
     let urlT = null;
     let urlP = null;
@@ -157,10 +147,10 @@ class LightPreview extends Component {
 
   render() {
     const { isDesktop, isModal, isOpenDropDown } = this.state;
-    const { data, behavior, modal } = this.props;
+    const { data, behavior, modal, isTemplate } = this.props;
 
     return (
-      <div className={`cta-design preview active pointer-none`}>
+      <div className={`cta-design preview active ${isTemplate ? "template" : 'pointer-none'}`}>
         <div
           className={`cta-content-container ${!this.ifOnlyImage() ? behavior.position : ''}`}
           style={!this.ifOnlyImage() ? {
@@ -172,7 +162,7 @@ class LightPreview extends Component {
           <div
             className={`cta-content ${isModal || this.ifOnlyImage() ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''} ${(!data.logo || data.logo == "http://" || data.logo == "https://") && data.image ? "without-logo" : ''}`}
             style={{
-              width: data.width + "px",
+              width: isTemplate ? "100%" : data.width + "px",
               background: data.background,
               border: data.stroke ? data.stroke : "none",
               borderRadius: data.corner + "px",
@@ -182,16 +172,19 @@ class LightPreview extends Component {
             ref={modal}
           >
             <div className={`cta-content-close ${this.ifOnlyImage() ? "d-none" : ''} ${data.closePosition}`} onClick={this.onClose}><i className="icon-close"></i></div>
-            <div className={`cta-block cta-content-logo ${data.logo && data.logo != "http://" && data.logo != "https://" ? "filed" : ''} ${data.logoAlign} ${data.logoStyle}`}>
-              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank" href={data.hyperlink ? data.hyperlink : "#"}><img style={{ width: data.logoMaxWidth + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
+            <div className={`cta-block cta-content-logo ${isTemplate ? "pointer-none" : ''} ${data.logo && data.logo != "http://" && data.logo != "https://" ? "filed" : ''} ${data.logoAlign} ${data.logoStyle}`}>
+              {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank" href={data.hyperlink ? data.hyperlink : "#"}><img style={{ width: isTemplate ? data.logoMaxWidth*0.7 : isTemplate + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`cta-blocks ${data.imageAlign} ${data.imageStyle}`}>
               <div className={`cta-block cta-content-image ${data.image && data.image != "http://" && data.image != "https://" ? "filed" : ''} ${data.imageAlign} ${data.imageStyle}`}>
                 {data.image && data.image != "http://" && data.image != "https://" ? <img src={data.image} /> : <div><div>Header image <span className="cta-optional">(optional)</span></div></div>}
               </div>
-              <div className={`cta-block cta-content-text ${data.reason ? "filed" : ''}`} style={{ fontSize: data.size + "px", fontFamily: data.font, color: data.color, fontWeight: data.reasonWeight, fontStyle: data.reasonItalic, textAlign: data.reasonAlign }}>
+              <div className={`cta-block cta-content-text ${data.reason ? "filed" : ''}`} style={{ fontSize: isTemplate ? data.size*0.7 : data.size + "px", fontFamily: data.font, color: data.color, fontWeight: data.reasonWeight, fontStyle: data.reasonItalic, textAlign: data.reasonAlign }}>
                 {data.reason.length > 0 ? data.reason : <div><div>Add Call to action text</div></div>}
               </div>
+            </div>
+            <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isSecondaryTextTab") }} style={{ fontSize: isTemplate ? data.secondarySize*0.7 : data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
+              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`${isDesktop ? "d-none" : ''}`} style={{ textAlign: data.mainButtonAlign }}>
               {
@@ -213,19 +206,21 @@ class LightPreview extends Component {
                   ) : ''
               }
             </div>
-            <div className={`cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
-              {(data.privacy && data.terms) || (data.company && data.email) ?
-                <div className="cta-content-unsubscribe">
-                  Reply STOP to unsubscribe or HELP for help. Estim. {data.estimated} msgs/month. Msg&Data rates may apply.
-            </div>
-                :
-                ''}
-              {data.customPrivacy ?
-                (data.privacy && data.terms) ? this.generateTPLinks() : <div className="cta-legal-toggler">Setup legal footnote</div>
-                :
-                (data.company && data.email) ? this.generateLink() : <div className="cta-legal-toggler"><span>Legal footnote not configured.</span></div>
-              }
-            </div>
+            {isTemplate ? '' : (
+              <div className={`cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
+                {(data.privacy && data.terms) || (data.company && data.email) ?
+                  <div className="cta-content-unsubscribe">
+                    Reply STOP to unsubscribe or HELP for help. Estim. {data.estimated} msgs/month. Msg&Data rates may apply.
+              </div>
+                  :
+                  ''}
+                {data.customPrivacy ?
+                  (data.privacy && data.terms) ? this.generateTPLinks() : <div className="cta-legal-toggler">Setup legal footnote</div>
+                  :
+                  (data.company && data.email) ? this.generateLink() : <div className="cta-legal-toggler"><span>Legal footnote not configured.</span></div>
+                }
+              </div>)
+            }
             {data.isPowered ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
           </div>
           <div className={`cta-trigger-button-container ${behavior.position}`}>

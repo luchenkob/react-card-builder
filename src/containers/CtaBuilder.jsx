@@ -17,10 +17,11 @@ import TriggerButtonTab from "../components/TriggerButtonTab";
 import ContactUsButtonTab from "../components/ContactUsButtonTab";
 import SocialShare from "../components/SocialShare";
 import ExportTab from "../components/ExportTab";
+import TemplatesTab from "../components/TemplatesTab";
 import LightPreview from "../components/LightPreview";
 import { validateEmail, validURL } from '../utils/utils';
 import shortLinks from "../services/shortLinks";
-import { LAYOUT_NAMES, APP_CONFIG, getInitialData } from "../defines";
+import { LAYOUT_NAMES, APP_CONFIG, TEMPLATES, getInitialData } from "../defines";
 import ReactTooltip from 'react-tooltip';
 
 class CtaBuilder extends Component {
@@ -30,6 +31,8 @@ class CtaBuilder extends Component {
     this.shortTP = new shortLinks();
     this.shortT = new shortLinks();
     this.shortP = new shortLinks();
+
+    this.connectedFonts = ["PT Sans"];
 
     this.eventUpdate = new Event('updateApp');
 
@@ -75,7 +78,7 @@ class CtaBuilder extends Component {
       },
       data: {
         isPowered: true,
-        folder: window.location.href,
+        folder: window.location.href.split("#")[0],
         size: 22,
         color: '#333333',
         font: 'PT Sans',
@@ -260,16 +263,16 @@ class CtaBuilder extends Component {
       }
     });
 
-    document.addEventListener("click", (e) => {
-      if (e.target.closest('.cta-edittab') == null && e.target.closest('.cta-content-container') == null && e.target.closest('.pcr-app') == null && e.target.closest('.cta-select__menu') == null) {
-        this.onCloseTabs();
-      }
-    });
+    // document.addEventListener("click", (e) => {
+    //   if (e.target.closest('.cta-edittab') == null && e.target.closest('.cta-content-container') == null && e.target.closest('.pcr-app') == null && e.target.closest('.cta-select__menu') == null) {
+    //     this.onCloseTabs();
+    //   }
+    // });
   }
 
   onEscape = (e) => {
     if (e.keyCode === 27) {
-      this.onCloseTabs();
+      this.onCloseTabsContainer();
     }
   }
 
@@ -298,6 +301,45 @@ class CtaBuilder extends Component {
     } else {
       this.setState({ fontsList: APP_CONFIG.fonts });
     }
+
+    TEMPLATES.forEach((template)=>{
+
+      if(this.connectedFonts.indexOf(template.font) == -1) {
+        this.connectedFonts.push(template.font)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.font + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.secondaryFont) == -1) {
+        this.connectedFonts.push(template.secondaryFont)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.secondaryFont + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.complianceFont) == -1) {
+        this.connectedFonts.push(template.complianceFont)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.complianceFont + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.fontA) == -1) {
+        this.connectedFonts.push(template.fontA)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.fontA + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.mainButtonFont) == -1) {
+        this.connectedFonts.push(template.mainButtonFont)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.mainButtonFont + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.triggerButtonFont) == -1) {
+        this.connectedFonts.push(template.triggerButtonFont)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.triggerButtonFont + ":400,500,700&display=swap");
+      }
+
+      if(this.connectedFonts.indexOf(template.textUsButtonFont) == -1) {
+        this.connectedFonts.push(template.textUsButtonFont)
+        this.addStyle("https://fonts.googleapis.com/css?family=" + template.textUsButtonFont + ":400,500,700&display=swap");
+      }
+      
+    });
   }
 
   addStyle = (url) => {
@@ -347,13 +389,13 @@ class CtaBuilder extends Component {
   }
 
   onViewChange = (is) => {
-    
+
     if (!is) {
-      this.onCloseTabs();
+      this.onCloseTabsContainer();
       this.setTooltip("isPreviewTooltip");
-    }else{
+    } else {
       this.onShowTabs();
-    } 
+    }
     this.setState({ isDesign: is });
   }
 
@@ -380,7 +422,7 @@ class CtaBuilder extends Component {
     if (tabs.isCallToActionTab) this.setTooltip("isCallToActionTooltip");
     if (tabs.isSecondaryTextTab) this.setTooltip("isSecondaryTextTooltip");
     if (tabs.isMainButtonTab) this.setTooltip("isMainButtonTooltip");
-    this.setState({isTabsActive:true, tabs });
+    this.setState({ isTabsActive: true, tabs });
   }
 
   onCloseSidebar = () => {
@@ -450,21 +492,24 @@ class CtaBuilder extends Component {
   }
 
   toggle = (name) => {
+
     const { tabs } = this.state;
 
     tabs[name] = !tabs[name];
     this.setState({ tabs: tabs });
+
+    this.onCloseTabs(name);
   }
 
-  onCloseTabs = () => {
-    this.setState({isTabsActive:false});
+  onCloseTabsContainer = () => {
+    this.setState({ isTabsActive: false });
   }
 
   onShowTabs = () => {
-    setTimeout(()=>{
-      this.setState({isTabsActive:true});
+    setTimeout(() => {
+      this.setState({ isTabsActive: true });
     }, 100);
-    
+
   }
 
   render() {
@@ -482,7 +527,7 @@ class CtaBuilder extends Component {
       isExportTab,
       toolTips,
       isMenuOpen,
-      isTabsActive 
+      isTabsActive
     } = this.state;
 
     return (
@@ -512,13 +557,16 @@ class CtaBuilder extends Component {
           <Preview onDontShow={() => { }} onRemindLater={() => { }} setTooltip={this.setTooltip} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={!isDesign} />
           <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
           <div className={`cta-tabs ${isTabsActive ? 'active' : ''}`}>
-            <div className="cta-tabs-close" onClick={this.onCloseTabs}><i className="icon-close"></i></div>
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Card styling" content={
+            <div className="cta-tabs-close" onClick={this.onCloseTabsContainer}><i className="icon-close"></i></div>
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isTemplatesTab} toggle={this.toggle} name="isTemplatesTab" title="Start with Template" content={
+              <TemplatesTab behavior={behavior}/>
+            } />
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Card styling" content={
               <BackgroundTab
                 data={data}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isTriggerButtonTab} toggle={this.toggle} name="isTriggerButtonTab" title="Trigger button" content={
+            <EditTab onClose={this.onCloseTabs} isHided={(layoutName == LAYOUT_NAMES[0] || layoutName == LAYOUT_NAMES[2])} isActive={tabs.isTriggerButtonTab} toggle={this.toggle} name="isTriggerButtonTab" title="Trigger button" content={
               <TriggerButtonTab
                 data={data}
                 behavior={behavior}
@@ -527,17 +575,17 @@ class CtaBuilder extends Component {
                 onFontchange={this.onFontchange}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isLogoTab} toggle={this.toggle} name="isLogoTab" title="Logo" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isLogoTab} toggle={this.toggle} name="isLogoTab" title="Logo" content={
               <LogoTab
                 data={data}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isFeaturedImageTab} toggle={this.toggle} name="isFeaturedImageTab" title="Hero image" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isFeaturedImageTab} toggle={this.toggle} name="isFeaturedImageTab" title="Hero image" content={
               <FeaturedImageTab
                 data={data}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isCallToActionTab} toggle={this.toggle} name="isCallToActionTab" title="Call-to-action text" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isCallToActionTab} toggle={this.toggle} name="isCallToActionTab" title="Call-to-action text" content={
               <CallToActionTab
                 data={data}
                 fontsList={fontsList}
@@ -545,14 +593,14 @@ class CtaBuilder extends Component {
                 onUpdate={this.onUpdate}
               />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary Text" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary Text" content={
               <SecondaryTextTab
                 data={data}
                 fontsList={fontsList}
                 onFontchange={this.onFontchange}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isContactUsButtonTab} toggle={this.toggle} name="isContactUsButtonTab" title="Click-to-text button" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[0] || layoutName == LAYOUT_NAMES[1]} isActive={tabs.isContactUsButtonTab} toggle={this.toggle} name="isContactUsButtonTab" title="Click-to-text button" content={
               <ContactUsButtonTab
                 data={data}
                 behavior={behavior}
@@ -561,14 +609,14 @@ class CtaBuilder extends Component {
                 onFontchange={this.onFontchange}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isMainButtonTab} toggle={this.toggle} name="isMainButtonTab" title="Main button" content={
+            <EditTab onClose={this.onCloseTabs} isHided={(layoutName == LAYOUT_NAMES[0] || layoutName == LAYOUT_NAMES[2])} isActive={tabs.isMainButtonTab} toggle={this.toggle} name="isMainButtonTab" title="Main button" content={
               <MainButtonTab
                 data={data}
                 fontsList={fontsList}
                 onFontchange={this.onFontchange}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isActive={tabs.isComplianceTab} toggle={this.toggle} name="isComplianceTab" title="Legal footer" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isComplianceTab} toggle={this.toggle} name="isComplianceTab" title="Legal footer" content={
               <ComplianceTab
                 data={data}
                 fontsList={fontsList}
@@ -579,7 +627,7 @@ class CtaBuilder extends Component {
         </div>
         <Modal isOpen={isLayoutChoose} overlayClose={false} onClose={this.onLayoutChooseClose} type="cta-modal-cm" content={<LayoutChoose onLayoutChoose={this.onLayoutChoose} />} />
         <Modal isOpen={isSocialShare} overlayClose={true} onClose={this.onSocialShareClose} content={<SocialShare />} />
-        <Modal isOpen={isExportTab} overlayClose={true} close={true} onClose={this.onExportTabClose} type="cta-modal-tab" content={<ExportTab modal={this.modal} isExportTab={isExportTab} data={data} behavior={behavior} layoutName={layoutName} preview={<LightPreview modal={this.modal} isDesign={isDesign} behavior={behavior} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={!isDesign} />} />} />
+        <Modal isOpen={isExportTab} overlayClose={true} close={true} onClose={this.onExportTabClose} type="cta-modal-tab" content={<ExportTab modal={this.modal} isExportTab={isExportTab} data={data} behavior={behavior} layoutName={layoutName} preview={<LightPreview modal={this.modal} isDesign={isDesign} behavior={behavior} layoutName={layoutName} data={data} isActive={!isDesign} />} />} />
       </div>
     );
   }

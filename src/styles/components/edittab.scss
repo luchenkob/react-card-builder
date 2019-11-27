@@ -39,6 +39,15 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media screen and (max-width: 1600px) {
+    width: $edittab-width-md;
+  }
+
+  @media screen and (max-width: 991px) {
+    width: $edittab-width-mobile;
+  }
+
   @media screen and (max-width: 991px) {
     width: 100%;
     left: 0;
@@ -177,18 +186,10 @@
     transform: translateX(0);
   }
 
-  @media screen and (max-width: 1600px) {
-    width: $edittab-width-md;
-  }
-
   @media screen and (max-width: $lg) {
     .cta-edit-tab-close {
       display: none;
     }
-  }
-
-  @media screen and (max-width: 991px) {
-    width: $edittab-width-mobile;
   }
 
   @media screen and (max-width: 560px) {
