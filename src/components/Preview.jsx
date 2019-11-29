@@ -24,6 +24,7 @@ class Preview extends Component {
     this.events();
 
     if(this.ifTriggerButton()) this.setState({isDesktop:false});
+    this.behaviorInit();
   }
 
   componentWillUnmount() {
@@ -32,9 +33,13 @@ class Preview extends Component {
   }
 
   events = () => {
+    const { layoutName } = this.props;
+
     document.addEventListener("click", (e) => {
       if (isMounted) if (e.target.closest('.cta-content') == null && e.target.closest('.cta-content-button.trigger') == null) {
-        this.setState({ isModal: false });
+        if(layoutName != LAYOUT_NAMES[0]) {
+          this.setState({ isModal: false });
+        }
       }
     });
   }
@@ -49,11 +54,12 @@ class Preview extends Component {
     }
 
     if (!isDesign == prevProps.isDesign) {
+
       if (isDesign) {
         this.setState({ isModal: false });
       } else {
         this.ifTriggerButton() ? this.setState({isDesktop:false}) : this.setState({isDesktop:true});
-        this.setState({ isModal: false }, () => {
+        this.setState({ isModal: layoutName == LAYOUT_NAMES[0] }, () => {
           this.behaviorInit();
         });
       }
@@ -61,13 +67,13 @@ class Preview extends Component {
   }
 
   onDesktop = () => {
-    this.setState({ isDesktop: true, isModal: false }, () => {
+    this.setState({ isDesktop: true, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
   }
 
   onPhone = () => {
-    this.setState({ isDesktop: false, isModal: false }, () => {
+    this.setState({ isDesktop: false, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
   }
@@ -78,7 +84,7 @@ class Preview extends Component {
       if (behavior.autoOpen) {
         setTimeout(() => {
           this.setState({ isModal: true });
-        }, behavior.delay)
+        }, behavior.delay+2000)
       }
     }
   }
@@ -185,7 +191,7 @@ class Preview extends Component {
     const { isActive, data, behavior, isDesign, isProduction, isTriggerActive, toolTips } = this.props;
 
     return (
-      <div className={`cta-design ${isProduction ? "production" : ''} preview ${isActive ? 'active' : ''}`}>
+      <div className={`cta-design ${isProduction ? "production" : ''} ${this.ifOnlyImage() ? "only-image" : ''} preview ${isActive ? 'active' : ''}`}>
         {!isProduction ? (
           <>
             <div className={`cta-screen-toggler ${this.ifOnlyImage() ? "d-none" : ''}`}>
@@ -206,7 +212,7 @@ class Preview extends Component {
             } : {}}
           >
             <div
-              className={`cta-content ${isModal || this.ifOnlyImage() ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''} ${(!data.logo || data.logo == "http://" || data.logo == "https://") ? "without-logo" : ''} ${data.image != "http://" ? "with-image" : ''}`}
+              className={`cta-content ${isModal ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''} ${(!data.logo || data.logo == "http://" || data.logo == "https://") ? "without-logo" : ''} ${data.image != "http://" ? "with-image" : ''}`}
               style={{
                 width: data.width + "px",
                 background: data.background,
@@ -216,7 +222,7 @@ class Preview extends Component {
                 boxShadow: data.shadow
               }}
             >
-              <div className={`cta-content-close ${this.ifOnlyImage() ? "d-none" : ''} ${data.closePosition}`} onClick={this.onClose}><i className="icon-close"></i></div>
+              <div className={`cta-content-close ${data.closePosition}`} onClick={this.onClose}><i className="icon-close"></i></div>
               <div className={`cta-block cta-content-logo ${data.logo && data.logo != "http://" && data.logo != "https://" ? "filed" : ''} ${data.logoAlign} ${data.logoStyle}`}>
                 {data.logo && data.logo != "http://" && data.logo != "https://" ? <a target="_blank" {... data.hyperlink && (data.hyperlink != "https://") && (data.hyperlink != "http://") ? {href: data.hyperlink} : {}}><img style={{ width: data.logoMaxWidth + "px" }} src={data.logo} /></a> : <div><div>Logo <span className="cta-optional">(optional)</span></div></div>}
               </div>

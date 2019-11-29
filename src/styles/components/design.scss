@@ -740,6 +740,13 @@
           }
         }
       }
+      &.only-image {
+        .cta-content-container {
+          .cta-content {
+            left: 0;
+          }
+        }
+      }
     }
   }
 }

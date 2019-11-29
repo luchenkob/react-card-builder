@@ -18,19 +18,16 @@ class ExportTab extends Component {
   }
 
   componentDidMount() {
-    const {layoutName} = this.props;
-
-    this.setState({tab: layoutName == LAYOUT_NAMES[0] ? "Image" : "Get code"});
-
     autosize(this.codeArea.current);
     this.buildCode();
   }
 
   componentDidUpdate(prevProps) {
-    const { isExportTab } = this.props;
+    const { isExportTab, layoutName } = this.props;
 
     if (!isExportTab == prevProps.isExportTab) {
       this.buildCode();
+      this.setState({tab: layoutName == LAYOUT_NAMES[0] ? "Image" : "Get code"});
     }
   }
 
