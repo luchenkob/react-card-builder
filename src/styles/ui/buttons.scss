@@ -133,6 +133,23 @@
   justify-content: center;
   height: 100%;
 
+  &.reverse {
+    flex-direction: row-reverse;
+    
+    &.in-tab{
+      justify-content: flex-end;
+
+      .cta-link {
+        &:last-child{
+          margin-left: 0;
+        }
+        &:first-child{
+          margin-left: $spacer/2;
+        }
+      }
+    }
+  }
+
   &.in-tab {
     padding: 0 $spacer;
     height: 2.4rem;

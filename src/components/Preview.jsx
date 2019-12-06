@@ -164,7 +164,7 @@ class Preview extends Component {
     let pdata = this.b64EncodeUnicode(JSON.stringify({ email: data.email, company: data.company }));
     let url = data.folder + "privacy/?d=" + pdata;
 
-    return <div className={`cta-content-legal-links ${!validateEmail(data.email) ? "disabled" : ''}`}><a target="_blank" href={url}>Terms & Privacy Policy Information</a></div>;
+    return <div className={`cta-content-legal-links ${!validateEmail(data.email) ? "disabled" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}><a target="_blank" href={url}>Terms & Privacy Policy Information</a></div>;
   }
 
   generateSMSLink = () => {
@@ -259,7 +259,7 @@ class Preview extends Component {
               </div>
               <div className={`cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
                 {(data.privacy && data.terms) || (data.company && data.email) ?
-                  <div className="cta-content-unsubscribe">
+                  <div className="cta-content-unsubscribe" style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}>
                     Reply STOP to unsubscribe or HELP for help. Estim. {data.estimated} msgs/month. Msg&Data rates may apply.
             </div>
                   :

@@ -34,6 +34,8 @@ class CtaBuilder extends Component {
 
     this.connectedFonts = ["PT Sans"];
 
+    const folder = window.location.href.split("#")[0];
+
     this.eventUpdate = new Event('updateApp');
 
     this.state = {
@@ -64,7 +66,7 @@ class CtaBuilder extends Component {
         isFeaturedImageTab: false,
         isMainButtonTab: false,
         isTriggerButtonTab: false,
-        isContactUsButtonTab: false,
+        isContactUsButtonTab: true,
       },
       behavior: {
         displayOnDesktop: true,
@@ -78,39 +80,39 @@ class CtaBuilder extends Component {
       },
       data: {
         isPowered: true,
-        folder: window.location.href.split("#")[0],
-        size: 22,
-        color: '#333333',
-        font: 'PT Sans',
-        reason: '',
-        reasonAlign: 'left',
-        reasonWeight: '',
+        folder: folder,
+        size: 32,
+        color: '#0068B8',
+        font: 'Open Sans',
+        reason: 'Text DEMO to 555888',
+        reasonAlign: 'center',
+        reasonWeight: 'bold',
         reasonItalic: '',
-        secondarySize: 22,
-        secondaryFont: 'PT Sans',
-        secondaryColor: '#333333',
-        secondaryReason: '',
-        secondaryReasonAlign: 'left',
+        secondarySize: 20,
+        secondaryFont: 'Rubik',
+        secondaryColor: '#75849C',
+        secondaryReason: 'We’ll send you a quick video that shows you how to use this tool to grow your subscriber list.',
+        secondaryReasonAlign: 'center',
         secondaryReasonWeight: '',
         secondaryReasonItalic: '',
-        company: '',
-        estimated: 1,
-        email: '',
+        company: 'Your Company Name',
+        estimated: 4,
+        email: 'email@domain.com',
         customPrivacy: false,
         terms: '',
         privacy: '',
-        complianceFont: 'PT Sans',
+        complianceFont: 'Rubik',
         complianceSize: 14,
         complianceColor: '#75849c',
-        complianceAlign: 'left',
+        complianceAlign: 'center',
         complianceWeight: '',
         complianceItalic: '',
-        logo: '',
+        logo: folder+'assets/templates/CTA-SimpleTexting_logo.png',
         logoStyle: 'boxed',
-        logoAlign: 'left',
-        logoMaxWidth: 100,
+        logoAlign: 'center',
+        logoMaxWidth: 192,
         hyperlink: '',
-        image: 'http://',
+        image: folder+'assets/templates/CTA-SimpleTexting_hero.png',
         imageWidth: 500,
         imageAlign: 'center',
         imageStyle: 'boxed',
@@ -120,17 +122,17 @@ class CtaBuilder extends Component {
         background: '#FFFFFF',
         corner: 8,
         shadow: '0px 16px 64px rgba(0,0,0,0.08)',
-        fontA: 'PT Sans',
+        fontA: 'Rubik',
         sizeA: 16,
         width: 500,
         closePosition: "cta-close-tr",
         keyword: '',
-        phone: '',
+        phone: '555888',
         shortTerms: '',
         shortTermsPrivacy: '',
         shortPrivacy: '',
-
-        mainButtonFont: 'PT Sans',
+    
+        mainButtonFont: 'Rubik',
         mainButtonFontColor: '#333333',
         mainButtonFontSize: 16,
         mainButtonAlign: "center",
@@ -140,11 +142,11 @@ class CtaBuilder extends Component {
         mainButtonCorner: 8,
         mainButtonStroke: "#e0e3e9",
         mainButtonBackground: "transparent",
-        mainButtonLabel: "",
-        mainButtonType: "cta-label-textonly",
-        mainButtonIcon: "",
-
-        triggerButtonFont: 'PT Sans',
+        mainButtonLabel: "Watch a demo",
+        mainButtonType: "cta-label-texticonl",
+        mainButtonIcon: "pack-message-circle",
+    
+        triggerButtonFont: 'Rubik',
         triggerButtonFontColor: '#333333',
         triggerButtonFontSize: 16,
         triggerButtonAlign: "right",
@@ -154,13 +156,13 @@ class CtaBuilder extends Component {
         triggerButtonCorner: 8,
         triggerButtonStroke: "#e0e3e9",
         triggerButtonBackground: "#eff3f6",
-        triggerButtonLabel: "",
-        triggerButtonType: "cta-label-textonly",
-        triggerButtonIcon: "",
-
-        textUsButtonNumber: '',
+        triggerButtonLabel: "Watch a demo",
+        triggerButtonType: "cta-label-texticonl",
+        triggerButtonIcon: "pack-message-circle",
+    
+        textUsButtonNumber: '555888',
         textUsButtonText: '',
-        textUsButtonFont: 'PT Sans',
+        textUsButtonFont: 'Rubik',
         textUsButtonFontColor: '#333333',
         textUsButtonFontSize: 16,
         textUsButtonAlign: "right",
@@ -170,9 +172,9 @@ class CtaBuilder extends Component {
         textUsButtonCorner: 8,
         textUsButtonStroke: "#e0e3e9",
         textUsButtonBackground: "transparent",
-        textUsButtonLabel: "",
-        textUsButtonType: "cta-label-textonly",
-        textUsButtonIcon: ""
+        textUsButtonLabel: "Watch a demo",
+        textUsButtonType: "cta-label-texticonl",
+        textUsButtonIcon: "pack-message-circle"
       }
     };
 
@@ -453,6 +455,8 @@ class CtaBuilder extends Component {
 
           if (validURL(data.terms)) this.shortP.set(data.terms, (link) => {
             data.shortTerms = link;
+
+            this.setState({ data:data })
           });
 
         } else {
@@ -462,6 +466,8 @@ class CtaBuilder extends Component {
 
           if (validateEmail(data.email) && (data.company.length > 0)) this.shortTP.set(url, (link) => {
             data.shortTermsPrivacy = link;
+            
+            this.setState({ data:data })
           });
         }
       }

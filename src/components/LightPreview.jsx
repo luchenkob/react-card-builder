@@ -123,7 +123,7 @@ class LightPreview extends Component {
 
     data.shortTermsPrivacy ? url = data.shortTermsPrivacy : url = data.folder + "privacy/?d=" + pdata;
 
-    return <div className="cta-content-legal-links"><a target="_blank" href={url}>For Terms & Privacy Policy, please visit {url}</a></div>;
+    return <div className="cta-content-legal-links" style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}><a target="_blank" href={url}>For Terms & Privacy Policy, please visit {url}</a></div>;
   }
 
   generateTPLinks = () => {
@@ -135,7 +135,7 @@ class LightPreview extends Component {
     data.shortTerms ? urlT = data.shortTerms : urlT = data.terms;
     data.shortPrivacy ? urlP = data.shortPrivacy : urlP = data.privacy;
 
-    return <div className="cta-content-legal-links"><div><a target="_blank" href={urlP}>For Privacy Policy, visit {urlP}</a></div><div><a target="_blank" href={urlT}>For Terms & Conditions visit {urlT}</a></div></div>
+    return <div className="cta-content-legal-links" style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}><div><a target="_blank" href={urlP}>For Privacy Policy, visit {urlP}</a></div><div><a target="_blank" href={urlT}>For Terms & Conditions visit {urlT}</a></div></div>
   }
 
   b64EncodeUnicode = (str) => {
@@ -209,7 +209,7 @@ class LightPreview extends Component {
             {isTemplate ? '' : (
               <div className={`cta-content-legal ${(data.privacy && data.terms) || (data.company && data.email) ? "filed" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic, textAlign: data.complianceAlign }}>
                 {(data.privacy && data.terms) || (data.company && data.email) ?
-                  <div className="cta-content-unsubscribe">
+                  <div className="cta-content-unsubscribe" style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}>
                     Reply STOP to unsubscribe or HELP for help. Estim. {data.estimated} msgs/month. Msg&Data rates may apply.
               </div>
                   :

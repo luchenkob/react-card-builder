@@ -109,7 +109,7 @@ class ExportTab extends Component {
         <div className="cta-tab-content">
           <div className="cta-group-title">
             <h2>Embed your widget</h2>
-            <div className="cta-links in-tab">
+            <div className={`cta-links in-tab ${LAYOUT_NAMES[0] == layoutName ? "reverse" : ''}`}>
               <div className={`cta-link ${tab == "Get code" ? 'active' : ''}`} onClick={() => { this.onTabChange("Get code") }}>Get code</div>
               <div className={`cta-link ${LAYOUT_NAMES[0] != layoutName ? "d-none" : ''} ${tab == "Image" ? 'active' : ''}`} onClick={() => { this.onTabChange("Image") }}>Image</div>
             </div>

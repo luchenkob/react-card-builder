@@ -97,11 +97,13 @@
   pointer-events: none;
   line-height: 140%;
   opacity: 0;
-  color: $color-dark-gray;
+  color: $color-dark-gray !important;
   font-size: 0.8125rem;
   font-style: normal !important;
   font-weight: normal !important;
   letter-spacing: 0.2px;
+  font-weight: 400 !important;
+  font-family: $font-family !important;
   transition: opacity $transition ease;
 
   &.active {
