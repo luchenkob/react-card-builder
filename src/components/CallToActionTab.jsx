@@ -10,12 +10,21 @@ class CallToActionTab extends Component {
     this.colorPickr = React.createRef();
     this.pickerC = null;
     this.isTypeColor = false;
+
   }
 
   componentDidMount() {
 
     this.initPicker();
 
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if (data.color != prevProps.data.color) {
+      this.pickerC.setColor(data.color);
+    }
   }
 
   initPicker = () => {
@@ -32,6 +41,7 @@ class CallToActionTab extends Component {
 
     this.pickerC.on('change', (color) => {
       if (!this.isTypeColor) {
+        const { data } = this.props;
         this.pickerC.setColor(String(color.toHEXA()));
         data.color = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -39,6 +49,7 @@ class CallToActionTab extends Component {
     })
 
     this.pickerC.on('clear', () => {
+      const { data } = this.props;
       data.color = '';
       onUpdate(data)
     })

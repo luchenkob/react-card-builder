@@ -118,7 +118,7 @@ class CtaBuilder extends Component {
         imageStyle: 'boxed',
         position: 'cta-boxed',
         colorA: '#75849C',
-        stroke: '',
+        stroke: '#ffffff',
         background: '#FFFFFF',
         corner: 8,
         shadow: '0px 16px 64px rgba(0,0,0,0.08)',

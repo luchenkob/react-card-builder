@@ -386,7 +386,7 @@
       &.left,
       &.right {
         .cta-content-text {
-          padding-top: $spacer;
+          padding-top: 0;
         }
         &.full-width {
           width: calc(100% + #{$spacer * 2});
@@ -665,6 +665,7 @@
         .cta-legal-toggler {
           text-decoration: none !important;
           color: $color-danger;
+          cursor:auto;
         }
 
         &.filed {

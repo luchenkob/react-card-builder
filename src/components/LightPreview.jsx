@@ -164,7 +164,7 @@ class LightPreview extends Component {
             style={{
               width: isTemplate ? "100%" : data.width + "px",
               background: data.background,
-              border: data.stroke ? data.stroke : "none",
+              border: data.stroke ? "1px solid "+data.stroke : "none",
               borderRadius: data.corner + "px",
               borderColor: data.stroke,
               boxShadow: data.shadow
