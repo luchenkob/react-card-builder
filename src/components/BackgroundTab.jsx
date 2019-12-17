@@ -176,7 +176,7 @@ class BackgroundTab extends Component {
             </div>
             <div className="cta-inline">
               <div>
-                <label>Close position</label>
+                <label>Close button</label>
                 <Select
                   value={this.getPositionValue()}
                   onChange={(value)=>{data.closePosition = value.value; onUpdate(data)}}

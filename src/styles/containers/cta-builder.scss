@@ -17,8 +17,24 @@
     width: 100%;
     text-align: center;
     bottom: 20px;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     color: $color-light-gray;
+
+    &.on-preview {
+      left: auto;
+      right: 14vw;
+      bottom: 4vh;
+      display: inline-block;
+      width: auto;
+      font-size: 0.875rem;
+    }
+
+    &.on-phone {
+      left: 0;
+      width: 100%;
+      text-align: center;
+      bottom: 16px;
+    }
 
     a {
       color: inherit;
@@ -26,6 +42,10 @@
       &:hover{
         text-decoration: none;
       }
+    }
+
+    @media screen and (max-width: $md) {
+      display: none !important;
     }
   }
 

@@ -23,7 +23,7 @@ class ToolTip extends Component {
       case 'bottom-trigger':
         return <i className="icon-arrow-special-right-top"></i>;
       case 'middle-trigger':
-        return <i className="icon-arrow-special-right-top"></i>;
+        return <i className="icon-arrow-special-right"></i>;
       default:
         return <i className="icon-arrow-special-right"></i>;
     }

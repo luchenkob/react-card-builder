@@ -20,10 +20,14 @@ class Preview extends Component {
   }
 
   componentDidMount() {
+    const {onSetDevice} = this.props;
     isMounted = true;
     this.events();
 
-    if(this.ifTriggerButton()) this.setState({isDesktop:false});
+    if(this.ifTriggerButton()) {
+      this.setState({isDesktop:false});
+      onSetDevice(false);
+    }
     this.behaviorInit();
   }
 
@@ -33,10 +37,10 @@ class Preview extends Component {
   }
 
   events = () => {
-    const { layoutName } = this.props;
-
     document.addEventListener("click", (e) => {
+      
       if (isMounted) if (e.target.closest('.cta-content') == null && e.target.closest('.cta-content-button.trigger') == null) {
+        const { layoutName } = this.props;
         if(layoutName != LAYOUT_NAMES[0]) {
           this.setState({ isModal: false });
         }
@@ -45,12 +49,13 @@ class Preview extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { isDesign, layoutName } = this.props;
+    const { isDesign, layoutName, onSetDevice } = this.props;
 
     isMounted = true;
 
     if(layoutName != prevProps.layoutName) {
       this.ifTriggerButton() ? this.setState({isDesktop:false}) : this.setState({isDesktop:true});
+      this.ifTriggerButton() ? onSetDevice(false) : onSetDevice(true);
     }
 
     if (!isDesign == prevProps.isDesign) {
@@ -59,6 +64,7 @@ class Preview extends Component {
         this.setState({ isModal: false });
       } else {
         this.ifTriggerButton() ? this.setState({isDesktop:false}) : this.setState({isDesktop:true});
+        this.ifTriggerButton() ? onSetDevice(false) : onSetDevice(true);
         this.setState({ isModal: layoutName == LAYOUT_NAMES[0] }, () => {
           this.behaviorInit();
         });
@@ -67,19 +73,23 @@ class Preview extends Component {
   }
 
   onDesktop = () => {
-    const { layoutName } = this.props;
+    const { layoutName, onSetDevice } = this.props;
 
     this.setState({ isDesktop: true, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
+
+    onSetDevice(true)
   }
 
   onPhone = () => {
-    const { layoutName } = this.props;
+    const { layoutName, onSetDevice } = this.props;
 
     this.setState({ isDesktop: false, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
+
+    onSetDevice(false)
   }
 
   behaviorInit = () => {
@@ -122,7 +132,8 @@ class Preview extends Component {
   onTrigger = () => {
     const { isModal, isProduction } = this.state;
     const { setTooltip } = this.props;
-    this.setState({ isModal: !isModal });
+
+    !this.ifTriggerButton() ? this.setState({ isModal: !isModal }) : null;
 
     if (!isProduction) setTooltip("isTriggerButtonTooltip");
   }
@@ -203,7 +214,7 @@ class Preview extends Component {
               <i className={`icon-desktop ${isDesktop ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''}`} onClick={this.onDesktop}></i>
               <i className={`icon-mobile ${!isDesktop ? "active" : ''}`} onClick={this.onPhone}></i>
             </div>
-            <div className={`cta-screen-imitation-outer ${!this.ifOnlyImage() ? isDesktop ? "desktop" : "phone" : ''}`}><span className="cta-screen-not-real">device preview not at real scale</span></div>
+            <div className={`cta-screen-imitation-outer ${!this.ifOnlyImage() ? isDesktop ? "desktop" : "phone" : ''}`}><span className="cta-screen-not-real">Device preview not to scale.</span></div>
           </>
         ) : null}
 
@@ -278,8 +289,8 @@ class Preview extends Component {
               {data.isPowered ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
             </div>
             <div className={`cta-trigger-button-container ${behavior.position}`}>
-              {!isProduction ? <ToolTip isActive={!isDesign && this.ifFlyoutButton() && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text="Click the trigger button to open the call to action you’ve designed" type="bottom-trigger" /> : ''}
-              <div className={`cta-btn-close cta-dropdown-toggler ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
+              {!isProduction ? <ToolTip isActive={!isDesign && this.ifTriggerButton() && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text={`${this.ifFlyoutButton() ? 'Click the trigger button to open the graphic you designed.' : 'Click the button to send your text.' }`} type="bottom-trigger" /> : ''}
+              <div className={`cta-btn-close cta-dropdown-toggler ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) || isModal ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
               <ReactTooltip id='dropdown' place="left" className="tolltip-basic" effect="solid" />
               <DropDown isOpen={isOpenDropDown} onClose={this.onCloseNot}>
                 <div className="cta-btn-close" onClick={this.onCloseNotification}><i className="icon-close"></i></div>

@@ -37,6 +37,7 @@
 
   .cta-screen-not-real {
     display: none;
+    font-size: 0.875rem;
   }
   &.desktop {
     width: 80%;
@@ -215,6 +216,14 @@
     @media screen and (max-width: $mobile) {
       top: $nav-height-mobile;
       height: calc(100% - #{$nav-height-mobile} - 10vh);
+    }
+  }
+}
+
+.cta-screen-imitation-outer {
+  &.phone {
+    .cta-screen-not-real {
+      bottom: -5vh;
     }
   }
 }

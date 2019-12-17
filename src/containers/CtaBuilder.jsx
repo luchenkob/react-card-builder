@@ -49,6 +49,7 @@ class CtaBuilder extends Component {
       layoutName: LAYOUT_NAMES[0],
       fontsList: [],
       isExportTab: false,
+      isDesktop: true,
       toolTips: {
         isCallToActionTooltip: true,
         isMainButtonTooltip: true,
@@ -525,6 +526,10 @@ class CtaBuilder extends Component {
     })
   }
 
+  onSetDevice = (state) => {
+    this.setState({isDesktop:state});
+  }
+
   render() {
     const {
       isLayoutChoose,
@@ -541,6 +546,7 @@ class CtaBuilder extends Component {
       toolTips,
       isMenuOpen,
       isTabsActive,
+      isDesktop
     } = this.state;
 
     return (
@@ -567,14 +573,14 @@ class CtaBuilder extends Component {
             isDesign={isDesign}
           /> */}
           <Design setTooltip={this.setTooltip} clearInputs={this.clearInputs} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={isDesign} />
-          <Preview onDontShow={() => { }} onRemindLater={() => { }} setTooltip={this.setTooltip} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={!isDesign} />
+          <Preview onDontShow={() => { }} onSetDevice={this.onSetDevice} onRemindLater={() => { }} setTooltip={this.setTooltip} isDesign={isDesign} behavior={behavior} toolTips={toolTips} layoutName={layoutName} tabs={tabs} onUpdateTabs={this.onUpdateTabs} data={data} isActive={!isDesign} />
           <ReactTooltip place="bottom" className="tolltip-basic" effect="solid" />
           <div className={`cta-tabs ${isTabsActive ? 'active' : ''}`}>
             <div className="cta-tabs-close" onClick={this.onCloseTabsContainer}><i className="icon-close"></i></div>
-            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isTemplatesTab} toggle={this.toggle} name="isTemplatesTab" title="Start with Template" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isTemplatesTab} toggle={this.toggle} name="isTemplatesTab" title="Start with template" content={
               <TemplatesTab behavior={behavior} chooseTemplate={this.chooseTemplate}/>
             } />
-            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Card styling" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isBackgroundTab} toggle={this.toggle} name="isBackgroundTab" title="Styling" content={
               <BackgroundTab
                 data={data}
                 onUpdate={this.onUpdate} />
@@ -606,7 +612,7 @@ class CtaBuilder extends Component {
                 onUpdate={this.onUpdate}
               />
             } />
-            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary Text" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary text" content={
               <SecondaryTextTab
                 data={data}
                 fontsList={fontsList}
@@ -641,7 +647,7 @@ class CtaBuilder extends Component {
         <Modal isOpen={isLayoutChoose} overlayClose={false} onClose={this.onLayoutChooseClose} type="cta-modal-cm" content={<LayoutChoose onLayoutChoose={this.onLayoutChoose} />} />
         <Modal isOpen={isSocialShare} overlayClose={true} onClose={this.onSocialShareClose} content={<SocialShare />} />
         <Modal isOpen={isExportTab} overlayClose={true} close={true} onClose={this.onExportTabClose} type="cta-modal-tab" content={<ExportTab modal={this.modal} isExportTab={isExportTab} data={data} behavior={behavior} layoutName={layoutName} preview={<LightPreview modal={this.modal} isDesign={isDesign} behavior={behavior} layoutName={layoutName} data={data} isActive={!isDesign} />} />} />
-        <div className="cta-copyright">© Copyright 2019  <a href="https://simpletexting.com/" target="_blank">SimpleTexting.com</a>. All rights reserved. </div>
+        <div className={'cta-copyright ' + `${!isDesign ? 'on-preview ' : ''}` + `${!isDesktop ? 'on-phone' : ''}`}>© Copyright 2019  <a href="https://simpletexting.com/" target="_blank">SimpleTexting.com</a>. All rights reserved. </div>
       </div>
     );
   }

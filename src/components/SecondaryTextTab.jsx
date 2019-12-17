@@ -94,7 +94,7 @@ class SecondaryTextTab extends Component {
           <div className="cta-group bb-0">
             <textarea
               rows="5"
-              defaultValue={data.secondaryReason}
+              value={data.secondaryReason}
               onChange={(e) => { data.secondaryReason = e.target.value; onUpdate(data) }}
               placeholder="Are there any other details your subscribers should know about? E.g. We’ll also send you a special pizza deal every Tuesday.">
             </textarea>

@@ -27,7 +27,7 @@ class ExportTab extends Component {
 
     if (!isExportTab == prevProps.isExportTab) {
       this.buildCode();
-      this.setState({tab: layoutName == LAYOUT_NAMES[0] ? "Image" : "Get code"});
+      this.setState({ tab: layoutName == LAYOUT_NAMES[0] ? "Image" : "Get code" });
     }
   }
 
@@ -58,7 +58,7 @@ class ExportTab extends Component {
   buildCode = () => {
     const { data, behavior, layoutName } = this.props;
 
-    this.codeArea.current.value = "<script>\nvar ctaData;\n(function (d, l, i, h, s) {\nh = d.getElementsByTagName('head')[0];\ns = d.createElement('script');\ns.async = 1;\ns.src = l;\nctaData = i;\nh.appendChild(s);\n}(document, '" + data.folder + "assets/ctaviewer.js?v=0.1', '" + this.b64EncodeUnicode(JSON.stringify({data:data, behavior:behavior, layoutName:layoutName})) + "'));\n</script>";
+    this.codeArea.current.value = "<script>\nvar ctaData;\n(function (d, l, i, h, s) {\nh = d.getElementsByTagName('head')[0];\ns = d.createElement('script');\ns.async = 1;\ns.src = l;\nctaData = i;\nh.appendChild(s);\n}(document, '" + data.folder + "assets/ctaviewer.js?v=0.1', '" + this.b64EncodeUnicode(JSON.stringify({ data: data, behavior: behavior, layoutName: layoutName })) + "'));\n</script>";
     autosize.update(this.codeArea.current);
     this.buildCodeLines();
     document.querySelector(".cta-builder-copy").classList.remove("disabled");
@@ -116,7 +116,7 @@ class ExportTab extends Component {
           </div>
           <div className={`cta-tab ${tab == "Get code" ? 'active' : ''}`}>
             <div className="cta-group bb-0 mb-0">
-              <p className="text-basic mb-d">Paste this code in the footer of the pages where you want your call-to-action to appear.</p>
+              <p className="text-basic mb-d">{`${LAYOUT_NAMES[0] == layoutName ? "Paste this code wherever you want your graphic to appear." : (LAYOUT_NAMES[1] == layoutName) || (LAYOUT_NAMES[2] == layoutName) ? 'Paste this code in the footer of the pages where you want your button to appear.' : ''}`}</p>
               <div className="cta-builder-code">
                 <div className="cta-builder-lines">
                   <textarea rows="1" ref={this.codeLines}></textarea>
@@ -137,7 +137,7 @@ class ExportTab extends Component {
           <div className={`cta-tab fixed ${tab == "Image" ? 'active' : ''}`}>
             <div className="cta-group d-stretch bb-0">
               <div>
-                <p className="text-basic mb-d">Export an image of the widget you created</p>
+                <p className="text-basic mb-d">Export the graphic you created.</p>
                 <div><div className="btn-outline-bold mb-d" onClick={this.onDownloadImage}>Download as JPG</div></div>
               </div>
               <div className="cta-image-preview">

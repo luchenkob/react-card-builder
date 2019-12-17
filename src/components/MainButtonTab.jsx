@@ -241,12 +241,12 @@ class MainButtonTab extends Component {
             </div>
           </div>
           <div className="cta-group bb-0">
-            <label>Number to send text</label>
+            <label>Number to send text to</label>
             <input type="text" value={data.phone} onChange={(e) => { data.phone = e.target.value; onUpdate(data) }} placeholder="eg: 555888" />
             <label>Prefilled text</label>
             <textarea
               rows="5"
-              defaultValue={data.keyword}
+              value={data.keyword}
               onChange={(e) => { data.keyword = e.target.value; onUpdate(data) }}
               placeholder="Keyword or default message...">
             </textarea>

@@ -91,10 +91,10 @@ class Design extends Component {
       <div className={`cta-design ${isStatic ? 'static' : ''} ${isActive ? 'active' : ''}`} ref={this.designContainer}>
         <div className="cta-content-container" ref={this.contentContainer}>
           <div className={`cta-design-clear ${this.ifTriggerButton() ? "d-none" : ''}`} onClick={clearInputs}>
-            <i className="icon-refresh"></i> Clear <span>all input fields</span>
+            <i className="icon-refresh"></i> Clear all
           </div>
           <div className={`cta-design-edit ${this.ifTriggerButton() ? "d-none" : ''}`} onClick={() => { this.navigateToTab("isBackgroundTab") }}>
-            Card styling <i className="icon-card-style"></i>
+            Styling <i className="icon-card-style"></i>
           </div>
           <div className={`cta-content active ${this.ifTriggerButton() ? "d-none" : ''}`} style={{ width: data.width + "px", background: data.background, border: data.stroke ? "1px solid "+data.stroke : "none", borderRadius: data.corner + "px", borderColor: data.stroke, boxShadow: data.shadow }}>
             <div className={`cta-content-close ${data.closePosition}`}><i className="icon-close"></i></div>
@@ -110,7 +110,7 @@ class Design extends Component {
               </div>
             </div>
             <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isSecondaryTextTab") }} style={{ fontSize: data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
-              <ToolTip isActive={isDesign && toolTips.isCallToActionTooltip} text="Click the text block to edit the dummy content." type="top-preview" />
+              <ToolTip isActive={isDesign && toolTips.isCallToActionTooltip} text="Click the text block to edit the template." type="top-preview" />
               {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div style={{ textAlign: data.mainButtonAlign }}>
@@ -129,7 +129,7 @@ class Design extends Component {
                         fontWeight: data.mainButtonWeight,
                         fontStyle: data.mainButtonItalic
                       }}>
-                        {(data.mainButtonLabel || data.mainButtonIcon) ? data.mainButtonIcon ? <><i className={data.mainButtonIcon}></i>{data.mainButtonLabel}</> : <>{data.mainButtonLabel}</> : <span>Setup main button</span>}
+                        {(data.mainButtonLabel || data.mainButtonIcon) ? data.mainButtonIcon ? <><i className={data.mainButtonIcon}></i>{data.mainButtonLabel}</> : <>{data.mainButtonLabel}</> : <span>Set up main button</span>}
                       </div>
                       <ToolTip isActive={isDesign && toolTips.isMainButtonTooltip} text="Only used on mobile, to open the native SMS app" type="top" />
                     </>
@@ -153,7 +153,7 @@ class Design extends Component {
             {data.isPowered ? (<div className="cta-content-copyright"><a target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
           </div>
           <div className={`cta-trigger-button-container ${behavior.position}`}>
-            <ToolTip isActive={isDesign && toolTips.isTriggerOnlyTooltip && this.ifTriggerButton()} text="Click the button to start editing it" type="middle-trigger" />
+            <ToolTip isActive={isDesign && toolTips.isTriggerOnlyTooltip && this.ifTriggerButton()} text="Click the button to start editing it." type="middle-trigger" />
             {
               !this.ifOnlyImage() && this.ifFlyoutButton() ?
                 (
@@ -168,7 +168,7 @@ class Design extends Component {
                     fontWeight: data.triggerButtonWeight,
                     fontStyle: data.triggerButtonItalic
                   }}>
-                    {(data.triggerButtonLabel || data.triggerButtonIcon) ? data.triggerButtonIcon ? <><i className={data.triggerButtonIcon}></i>{data.triggerButtonLabel}</> : <>{data.triggerButtonLabel}</> : <span>Setup trigger button</span>}
+                    {(data.triggerButtonLabel || data.triggerButtonIcon) ? data.triggerButtonIcon ? <><i className={data.triggerButtonIcon}></i>{data.triggerButtonLabel}</> : <>{data.triggerButtonLabel}</> : <span>Set up trigger button</span>}
                   </div>
                 ) : ''
             }
