@@ -31,8 +31,24 @@ class ContactUsButtonTab extends Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if ((data.textUsButtonFontColor != prevProps.data.textUsButtonFontColor) || (data.textUsButtonBackground != prevProps.data.textUsButtonBackground) || (data.textUsButtonStroke != prevProps.data.textUsButtonStroke)) {
+      this.isTypeColor = true;
+      this.pickerC.setColor(data.textUsButtonFontColor);
+      this.pickerBG.setColor(data.textUsButtonBackground);
+      this.pickerSTR.setColor(data.textUsButtonStroke);
+
+      setTimeout(()=>{
+        this.isTypeColor = false;
+      }, 600);
+    }
+  }
+
   initPicker = () => {
-    const { data, onUpdate } = this.props;
+    const { onUpdate } = this.props;
+    let {data} = this.props;
 
     this.pickerC = Pickr.create({
       el: this.colorPickr.current,
@@ -45,6 +61,7 @@ class ContactUsButtonTab extends Component {
 
     this.pickerC.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerC.setColor(String(color.toHEXA()));
         data.textUsButtonFontColor = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -52,6 +69,7 @@ class ContactUsButtonTab extends Component {
     })
 
     this.pickerC.on('clear', () => {
+      data = this.props.data;
       data.textUsButtonFontColor = '';
       onUpdate(data)
     })
@@ -67,6 +85,7 @@ class ContactUsButtonTab extends Component {
 
     this.pickerBG.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerBG.setColor(String(color.toHEXA()));
         data.textUsButtonBackground = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -74,6 +93,7 @@ class ContactUsButtonTab extends Component {
     })
 
     this.pickerBG.on('clear', () => {
+      data = this.props.data;
       data.textUsButtonBackground = '';
       onUpdate(data)
     })
@@ -89,6 +109,7 @@ class ContactUsButtonTab extends Component {
 
     this.pickerSTR.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerSTR.setColor(String(color.toHEXA()));
         data.textUsButtonStroke = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -96,6 +117,7 @@ class ContactUsButtonTab extends Component {
     })
 
     this.pickerSTR.on('clear', () => {
+      data = this.props.data;
       data.textUsButtonStroke = '';
       onUpdate(data)
     })

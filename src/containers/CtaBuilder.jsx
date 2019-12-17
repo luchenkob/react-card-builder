@@ -519,6 +519,7 @@ class CtaBuilder extends Component {
   }
 
   chooseTemplate = (i) => {
+
     this.setState({data:TEMPLATES[i]}, ()=>{
       document.dispatchEvent(this.eventUpdate);
     })

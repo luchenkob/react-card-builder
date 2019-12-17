@@ -31,8 +31,24 @@ class MainButtonTab extends Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if ((data.mainButtonFontColor != prevProps.data.mainButtonFontColor) || (data.mainButtonBackground != prevProps.data.mainButtonBackground) || (data.mainButtonStroke != prevProps.data.mainButtonStroke)) {
+      this.isTypeColor = true;
+      this.pickerC.setColor(data.mainButtonFontColor);
+      this.pickerBG.setColor(data.mainButtonBackground);
+      this.pickerSTR.setColor(data.mainButtonStroke);
+
+      setTimeout(()=>{
+        this.isTypeColor = false;
+      }, 600);
+    }
+  }
+
   initPicker = () => {
-    const { data, onUpdate } = this.props;
+    const { onUpdate } = this.props;
+    let {data} = this.props;
 
     this.pickerC = Pickr.create({
       el: this.colorPickr.current,
@@ -45,6 +61,7 @@ class MainButtonTab extends Component {
 
     this.pickerC.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerC.setColor(String(color.toHEXA()));
         data.mainButtonFontColor = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -52,6 +69,7 @@ class MainButtonTab extends Component {
     })
 
     this.pickerC.on('clear', () => {
+      data = this.props.data;
       data.mainButtonFontColor = '';
       onUpdate(data)
     })
@@ -67,6 +85,7 @@ class MainButtonTab extends Component {
 
     this.pickerBG.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerBG.setColor(String(color.toHEXA()));
         data.mainButtonBackground = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -74,6 +93,7 @@ class MainButtonTab extends Component {
     })
 
     this.pickerBG.on('clear', () => {
+      data = this.props.data;
       data.mainButtonBackground = '';
       onUpdate(data)
     })
@@ -89,6 +109,7 @@ class MainButtonTab extends Component {
 
     this.pickerSTR.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerSTR.setColor(String(color.toHEXA()));
         data.mainButtonStroke = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -96,6 +117,7 @@ class MainButtonTab extends Component {
     })
 
     this.pickerSTR.on('clear', () => {
+      data = this.props.data;
       data.mainButtonStroke = '';
       onUpdate(data)
     })

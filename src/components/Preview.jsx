@@ -67,24 +67,29 @@ class Preview extends Component {
   }
 
   onDesktop = () => {
+    const { layoutName } = this.props;
+
     this.setState({ isDesktop: true, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
   }
 
   onPhone = () => {
+    const { layoutName } = this.props;
+
     this.setState({ isDesktop: false, isModal: layoutName == LAYOUT_NAMES[0] }, () => {
       this.behaviorInit();
     });
   }
 
   behaviorInit = () => {
-    const { data, behavior } = this.props;
+    const { data, behavior, isProduction, layoutName } = this.props;
+
     if (data.triggerButtonLabel || data.triggerButtonIcon) {
       if (behavior.autoOpen) {
         setTimeout(() => {
           this.setState({ isModal: true });
-        }, behavior.delay+2000)
+        }, (layoutName != LAYOUT_NAMES[0] ) ? behavior.delay+2000 : isProduction ? behavior.delay+2000 : 0)
       }
     }
   }
@@ -273,7 +278,7 @@ class Preview extends Component {
               {data.isPowered ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
             </div>
             <div className={`cta-trigger-button-container ${behavior.position}`}>
-              {!isProduction ? <ToolTip isActive={!isDesign && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text="Click the trigger button to open the call to action you’ve designed" type="bottom-trigger" /> : ''}
+              {!isProduction ? <ToolTip isActive={!isDesign && this.ifFlyoutButton() && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text="Click the trigger button to open the call to action you’ve designed" type="bottom-trigger" /> : ''}
               <div className={`cta-btn-close cta-dropdown-toggler ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
               <ReactTooltip id='dropdown' place="left" className="tolltip-basic" effect="solid" />
               <DropDown isOpen={isOpenDropDown} onClose={this.onCloseNot}>

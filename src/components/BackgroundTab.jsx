@@ -24,8 +24,24 @@ class BackgroundTab extends Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if ((data.background != prevProps.data.background) || (data.stroke != prevProps.data.stroke)) {
+      this.isTypeColor = true;
+      this.pickerBG.setColor(data.background);
+      this.pickerSTR.setColor(data.stroke);
+
+      setTimeout(()=>{
+        this.isTypeColor = false;
+      }, 600);
+    }
+  }
+
+
   initPicker = () => {
-    const { data, onUpdate } = this.props;
+    const { onUpdate } = this.props;
+    let {data} = this.props;
 
     this.pickerBG = Pickr.create({
       el: this.bgColorPickr.current,
@@ -38,6 +54,7 @@ class BackgroundTab extends Component {
 
     this.pickerBG.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerBG.setColor(String(color.toHEXA()));
         data.background = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -45,6 +62,7 @@ class BackgroundTab extends Component {
     })
 
     this.pickerBG.on('clear', () => {
+      data = this.props.data;
       data.background = '';
       onUpdate(data)
     })
@@ -60,6 +78,7 @@ class BackgroundTab extends Component {
 
     this.pickerSTR.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerSTR.setColor(String(color.toHEXA()));
         data.stroke = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -67,6 +86,7 @@ class BackgroundTab extends Component {
     })
 
     this.pickerSTR.on('clear', () => {
+      data = this.props.data;
       data.stroke = '';
       onUpdate(data)
     })

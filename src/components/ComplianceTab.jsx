@@ -25,8 +25,22 @@ class ComplianceTab extends Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if (data.complianceColor != prevProps.data.complianceColor) {
+      this.isTypeColor = true;
+      this.pickerC.setColor(data.complianceColor);
+
+      setTimeout(()=>{
+        this.isTypeColor = false;
+      }, 600);
+    }
+  }
+
   initPicker = () => {
-    const { data, onUpdate } = this.props;
+    const { onUpdate } = this.props;
+    let {data} = this.props;
 
     this.pickerC = Pickr.create({
       el: this.colorPickr.current,
@@ -39,6 +53,7 @@ class ComplianceTab extends Component {
 
     this.pickerC.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerC.setColor(String(color.toHEXA()));
         data.complianceColor = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -46,6 +61,7 @@ class ComplianceTab extends Component {
     })
 
     this.pickerC.on('clear', () => {
+      data = this.props.data;
       data.complianceColor = '';
       onUpdate(data)
     })

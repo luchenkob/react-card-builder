@@ -31,8 +31,24 @@ class TriggerButtonTab extends Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if ((data.triggerButtonFontColor != prevProps.data.triggerButtonFontColor) || (data.triggerButtonBackground != prevProps.data.triggerButtonBackground) || (data.triggerButtonStroke != prevProps.data.triggerButtonStroke)) {
+      this.isTypeColor = true;
+      this.pickerC.setColor(data.triggerButtonFontColor);
+      this.pickerBG.setColor(data.triggerButtonBackground);
+      this.pickerSTR.setColor(data.triggerButtonStroke);
+
+      setTimeout(()=>{
+        this.isTypeColor = false;
+      }, 600);
+    }
+  }
+
   initPicker = () => {
-    const { data, onUpdate } = this.props;
+    const { onUpdate } = this.props;
+    let {data} = this.props;
 
     this.pickerC = Pickr.create({
       el: this.colorPickr.current,
@@ -45,6 +61,7 @@ class TriggerButtonTab extends Component {
 
     this.pickerC.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerC.setColor(String(color.toHEXA()));
         data.triggerButtonFontColor = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -52,6 +69,7 @@ class TriggerButtonTab extends Component {
     })
 
     this.pickerC.on('clear', () => {
+      data = this.props.data;
       data.triggerButtonFontColor = '';
       onUpdate(data)
     })
@@ -67,6 +85,7 @@ class TriggerButtonTab extends Component {
 
     this.pickerBG.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerBG.setColor(String(color.toHEXA()));
         data.triggerButtonBackground = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -74,6 +93,7 @@ class TriggerButtonTab extends Component {
     })
 
     this.pickerBG.on('clear', () => {
+      data = this.props.data;
       data.triggerButtonBackground = '';
       onUpdate(data)
     })
@@ -89,6 +109,7 @@ class TriggerButtonTab extends Component {
 
     this.pickerSTR.on('change', (color) => {
       if (!this.isTypeColor) {
+        data = this.props.data;
         this.pickerSTR.setColor(String(color.toHEXA()));
         data.triggerButtonStroke = "#" + color.toHEXA().join('');
         onUpdate(data)
@@ -96,6 +117,7 @@ class TriggerButtonTab extends Component {
     })
 
     this.pickerSTR.on('clear', () => {
+      data = this.props.data;
       data.triggerButtonStroke = '';
       onUpdate(data)
     })
