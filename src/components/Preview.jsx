@@ -228,7 +228,7 @@ class Preview extends Component {
             } : {}}
           >
             <div
-              className={`cta-content ${isModal ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''} ${(!data.logo || data.logo == "http://" || data.logo == "https://") ? "without-logo" : ''} ${data.image != "http://" ? "with-image" : ''}`}
+              className={`cta-content ${this.ifFlyoutButton() ? "flyout-button" : ''} ${isModal ? "active" : ''} ${this.ifTriggerButton() ? "d-none" : ''} ${(!data.logo || data.logo == "http://" || data.logo == "https://") ? "without-logo" : ''} ${data.image != "http://" ? "with-image" : ''}`}
               style={{
                 width: data.width + "px",
                 background: data.background,

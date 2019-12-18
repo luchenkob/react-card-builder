@@ -647,7 +647,7 @@ class CtaBuilder extends Component {
         <Modal isOpen={isLayoutChoose} overlayClose={false} onClose={this.onLayoutChooseClose} type="cta-modal-cm" content={<LayoutChoose onLayoutChoose={this.onLayoutChoose} />} />
         <Modal isOpen={isSocialShare} overlayClose={true} onClose={this.onSocialShareClose} content={<SocialShare />} />
         <Modal isOpen={isExportTab} overlayClose={true} close={true} onClose={this.onExportTabClose} type="cta-modal-tab" content={<ExportTab modal={this.modal} isExportTab={isExportTab} data={data} behavior={behavior} layoutName={layoutName} preview={<LightPreview modal={this.modal} isDesign={isDesign} behavior={behavior} layoutName={layoutName} data={data} isActive={!isDesign} />} />} />
-        <div className={'cta-copyright ' + `${!isDesign ? 'on-preview ' : ''}` + `${!isDesktop ? 'on-phone' : ''}`}>© Copyright 2019  <a href="https://simpletexting.com/" target="_blank">SimpleTexting.com</a>. All rights reserved. </div>
+        <div className={'cta-copyright ' + `${!isDesign ? 'on-preview ' : ''}` + `${!isDesktop ? 'on-phone' : ''}` + `${layoutName == LAYOUT_NAMES[0] ? 'on-image' : ''}`}>© Copyright 2019  <a href="https://simpletexting.com/" target="_blank">SimpleTexting.com</a>. All rights reserved. </div>
       </div>
     );
   }

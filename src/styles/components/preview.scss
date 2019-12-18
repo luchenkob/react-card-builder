@@ -199,6 +199,16 @@
     border-radius: 60px;
     overflow: hidden;
 
+    .cta-content {
+      overflow: scroll !important;
+      transform: scale(1);
+      max-height: calc(100vh - #{$nav-height} - 25vh - 40px);
+
+      &.flyout-button {
+        transform: scale(1);
+      }
+    }
+
     .cta-screen-not-real {
       display: block;
       white-space: nowrap;
@@ -218,6 +228,42 @@
       height: calc(100% - #{$nav-height-mobile} - 10vh);
     }
   }
+
+  @media screen and (max-height: 1060px) {
+    .cta-content {
+      transform-origin: center center;
+      transform: scale(0.9);
+
+      &.flyout-button {
+        transform-origin: bottom right;
+        transform: scale(0.8);
+      }
+    }
+  }
+
+  @media screen and (max-height: 860px) {
+    .cta-content {
+      transform-origin: center center;
+      transform: scale(0.8);
+
+      &.flyout-button {
+        transform-origin: bottom right;
+        transform: scale(0.7);
+      }
+    }
+  }
+
+  @media screen and (max-height: 760px) {
+    .cta-content {
+      transform-origin: center center;
+      transform: scale(0.7);
+
+      &.flyout-button {
+        transform-origin: bottom right;
+        transform: scale(0.6);
+      }
+    }
+  }
 }
 
 .cta-screen-imitation-outer {
@@ -229,7 +275,7 @@
 }
 
 .cta-design {
-  &.preview{
+  &.preview {
     .cta-trigger-button-container {
       display: inline-block;
       width: auto;
