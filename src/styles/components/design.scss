@@ -734,10 +734,32 @@
       .cta-content {
         transform-origin: center center;
         transform: scale(1);
+      }
+
+      .cta-position-br {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom right;
+            transform: scale(1);
+          }
+        }
+      }
   
-        &.flyout-button {
-          transform-origin: bottom right;
-          transform: scale(1);
+      .cta-position-bc {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom center;
+            transform: scale(1);
+          }
+        }
+      }
+  
+      .cta-position-bl {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom left;
+            transform: scale(1);
+          }
         }
       }
     }
@@ -746,10 +768,32 @@
       .cta-content {
         transform-origin: center center;
         transform: scale(0.9);
+      }
+
+      .cta-position-br {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom right;
+            transform: scale(0.9);
+          }
+        }
+      }
   
-        &.flyout-button {
-          transform-origin: bottom right;
-          transform: scale(0.9);
+      .cta-position-bc {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom center;
+            transform: scale(0.9);
+          }
+        }
+      }
+  
+      .cta-position-bl {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom left;
+            transform: scale(0.9);
+          }
         }
       }
     }
@@ -758,10 +802,32 @@
       .cta-content {
         transform-origin: center center;
         transform: scale(0.8);
+      }
+
+      .cta-position-br {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom right;
+            transform: scale(0.8);
+          }
+        }
+      }
   
-        &.flyout-button {
-          transform-origin: bottom right;
-          transform: scale(0.8);
+      .cta-position-bc {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom center;
+            transform: scale(0.8);
+          }
+        }
+      }
+  
+      .cta-position-bl {
+        .cta-content {
+          &.flyout-button {
+            transform-origin: bottom left;
+            transform: scale(0.8);
+          }
         }
       }
     }

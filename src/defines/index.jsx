@@ -233,9 +233,9 @@ export const services = {
 }
 
 export const LAYOUT_NAMES = [
-  'Image only',
-  'Button + image',
-  'Click-to-text button',
+  'Sign-Up Graphics',
+  'Mobile Sign-Up Widget (Popup)',
+  'Click-to-Text Button',
 ];
 
 export const SWATCHES = [
