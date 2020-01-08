@@ -67,6 +67,8 @@ devServer: {
 plugins: [
   new CopyWebpackPlugin([
     { from: path.resolve('src/assets'), to: path.resolve('dist/assets') },
+    { from: path.resolve('src/privacy'), to: path.resolve('dist/privacy') },
+    { from: path.resolve('src/index.html'), to: path.resolve('dist/index.html') },
   ])
 ]
 };
