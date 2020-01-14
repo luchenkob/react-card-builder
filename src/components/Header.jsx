@@ -71,7 +71,7 @@ class Header extends Component {
     return (
       <div className="cta-header">
         <div className="cta-header-menu">
-          <img className="cta-logo" src="./assets/img/sms-logo.svg" alt="" />
+          <a href="https://simpletexting.com/" target="_blank"><img className="cta-logo" src="./assets/img/sms-logo.svg" alt="" /></a>
           <div className="d-none">
             <button className="btn btn-transparent cta-toggler cta-dropdown-toggler" onClick={this.onMainToggler}><i className="icon-menu"></i></button>
             <DropDown isOpen={isOpenMainMenu} onClose={this.onCloseMenu}>
