@@ -180,11 +180,11 @@ class LightPreview extends Component {
                 {data.image && data.image != "http://" && data.image != "https://" ? <img src={data.image} /> : <div><div>Header image <span className="cta-optional">(optional)</span></div></div>}
               </div>
               <div className={`cta-block cta-content-text ${data.reason ? "filed" : ''}`} style={{ fontSize: isTemplate ? data.size*0.7 : data.size + "px", fontFamily: data.font, color: data.color, fontWeight: data.reasonWeight, fontStyle: data.reasonItalic, textAlign: data.reasonAlign }}>
-                {data.reason.length > 0 ? data.reason : <div><div>Add Call to action text</div></div>}
+                {data.reason.length > 0 ? data.reason : <div><div>Add Headline</div></div>}
               </div>
             </div>
             <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} style={{ fontSize: isTemplate ? data.secondarySize*0.7 : data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
-              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
+              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Subheading <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div className={`${isDesktop ? "d-none" : ''}`} style={{ textAlign: data.mainButtonAlign }}>
               {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import autosize from "../utils/autosize";
-import htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
 
 import { LAYOUT_NAMES } from "../defines"
 
@@ -36,19 +36,25 @@ class ExportTab extends Component {
 
     modal = modal.current;
 
-    modal.classList.add("for-render");
+    modal.classList.add("for-fix");
 
-    htmlToImage.toPng(modal)
-      .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.download = 'preview.png';
-        link.href = dataUrl;
-        link.click();
-        modal.classList.remove("for-render");
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error);
-      });
+    setTimeout(()=>{
+      modal.classList.remove("for-fix");
+
+      modal.classList.add("for-render");
+
+      html2canvas(modal, { allowTaint: true, useCORS:true, scrollX:0, scrollY:0 })
+        .then(function (canvas) {
+          var link = document.createElement('a');
+          link.download = 'preview.png';
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          modal.classList.remove("for-render");
+        })
+        .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+        });
+    }, 100);
   }
 
   onTabChange = (tab) => {

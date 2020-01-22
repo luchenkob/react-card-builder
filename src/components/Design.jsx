@@ -106,12 +106,12 @@ class Design extends Component {
                 {data.image && data.image != "http://" && data.image != "https://" ? <img src={data.image} style={{ width: data.imageWidth + "px" }} /> : <div><img src="./assets/img/hero-section.svg" /><div>Hero image <span className="cta-optional">(optional)</span></div></div>}
               </div>
               <div className={`cta-block cta-content-text ${data.reason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isCallToActionTab") }} style={{ fontSize: data.size + "px", fontFamily: data.font, color: data.color, fontWeight: data.reasonWeight, fontStyle: data.reasonItalic, textAlign: data.reasonAlign }}>
-                {data.reason.length > 0 ? data.reason : <div><img src="./assets/img/call-text-section.svg" /><div>Call to action text</div></div>}
+                {data.reason.length > 0 ? data.reason : <div><img src="./assets/img/call-text-section.svg" /><div>Headline</div></div>}
               </div>
             </div>
             <div className={`cta-block cta-content-text ${data.secondaryReason ? "filed" : ''}`} onClick={() => { this.navigateToTab("isSecondaryTextTab") }} style={{ fontSize: data.secondarySize + "px", fontFamily: data.secondaryFont, color: data.secondaryColor, fontWeight: data.secondaryReasonWeight, fontStyle: data.secondaryReasonItalic, textAlign: data.secondaryReasonAlign }}>
               <ToolTip isActive={isDesign && toolTips.isCallToActionTooltip} text="Click the text block to edit the template." type="top-preview" />
-              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Secondary text <span className="cta-optional">(optional)</span></div></div>}
+              {data.secondaryReason.length > 0 ? data.secondaryReason : <div><img src="./assets/img/sec-text-section.svg" /><div>Subheading <span className="cta-optional">(optional)</span></div></div>}
             </div>
             <div style={{ textAlign: data.mainButtonAlign }}>
               {

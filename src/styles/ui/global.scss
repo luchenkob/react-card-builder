@@ -93,6 +93,12 @@ body {
   border-color: $color-danger !important;
 }
 
+@media screen and (max-width:767px) {
+  .hide-md {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width:560px) {
   .show-mobile {
     display: block !important;

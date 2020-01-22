@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DropDown from "../components/DropDown";
 import ReactTooltip from 'react-tooltip';
-import { LAYOUT_NAMES } from "../defines";
+import { LAYOUT_NAMES, APP_CONFIG } from "../defines";
 import ToolTip from "../components/ToolTip";
 import { validateEmail, validURL } from '../utils/utils';
 
@@ -94,8 +94,9 @@ class Header extends Component {
           <div className={`cta-link ${!isDesign ? 'active' : ''}`} onClick={() => { onViewChange(false) }}><ToolTip isActive={isDesign && toolTips.isPreviewTooltip} text="Switch to preview to see the final result." type="top-preview" /><span>Preview</span></div>
         </div>
         <div className="cta-header-button">
+          <a href={APP_CONFIG.helpCenter} target="_blank"><i className="icon-help-circle"></i></a>
           <div className="d-inline pos-r" data-tip={`${this.isExportDisabled() ? "Some elements not configued:" + this.getError() : ''}`} data-for='export-tooltip'>
-            <button className={`btn btn-special ${this.isExportDisabled() ? "disabled" : ''}`} onClick={() => { onExportToggle() }}>Export <span className="hide-mobile">& embed</span></button>
+            <button className={`btn btn-special ${this.isExportDisabled() ? "disabled" : ''}`} onClick={() => { onExportToggle() }}>Export {layoutName == LAYOUT_NAMES[0] ? <span className="hide-md">& embed</span> : ''}</button>
             <ReactTooltip id='export-tooltip' place="bottom" className="tolltip-basic tw-200" effect="solid" />
             <ToolTip isActive={isDesign && toolTips.isExportTooltip} text="All done? Get your embed instructions here." type="top-header" />
           </div>

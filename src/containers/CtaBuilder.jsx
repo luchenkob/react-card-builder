@@ -76,7 +76,7 @@ class CtaBuilder extends Component {
         bottom: 32,
         left: 32,
         right: 32,
-        autoOpen: true,
+        autoOpen: false,
         delay: 1000,
       },
       data: {
@@ -142,7 +142,7 @@ class CtaBuilder extends Component {
         mainButtonShadow: '0px 0px 0px rgba(0,0,0,0.0)',
         mainButtonCorner: 8,
         mainButtonStroke: "#e0e3e9",
-        mainButtonBackground: "transparent",
+        mainButtonBackground: "#eff3f6",
         mainButtonLabel: "Watch a demo",
         mainButtonType: "cta-label-texticonl",
         mainButtonIcon: "pack-message-circle",
@@ -172,7 +172,7 @@ class CtaBuilder extends Component {
         textUsButtonShadow: '0px 16px 64px rgba(0,0,0,0.08)',
         textUsButtonCorner: 8,
         textUsButtonStroke: "#e0e3e9",
-        textUsButtonBackground: "transparent",
+        textUsButtonBackground: "#eff3f6",
         textUsButtonLabel: "Watch a demo",
         textUsButtonType: "cta-label-texticonl",
         textUsButtonIcon: "pack-message-circle"
@@ -612,7 +612,7 @@ class CtaBuilder extends Component {
                 onUpdate={this.onUpdate}
               />
             } />
-            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Secondary text" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isSecondaryTextTab} toggle={this.toggle} name="isSecondaryTextTab" title="Subheading" content={
               <SecondaryTextTab
                 data={data}
                 fontsList={fontsList}

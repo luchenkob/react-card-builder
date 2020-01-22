@@ -22,6 +22,25 @@
       }
     }
   }
+
+  .cta-header-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: $color-dark-gray;
+      text-decoration: none;
+      transition: color $transition ease;
+      margin-right: 1rem;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
   
   .cta-header-menu {
     display: flex;
