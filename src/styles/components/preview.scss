@@ -375,8 +375,18 @@
   height: 100%;
   overflow-y: hidden;
 
+  .cta-design {
+    .cta-content-container {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: translateX(0) translateY(0);
+    }
+  }
+
   .cta-content {
     transform-origin: center center;
+    position: static;
     transform: scale(1);
   }
 

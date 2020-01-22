@@ -7,6 +7,16 @@
   display: none;
   position: relative;
 
+  &.render {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transform: translateY(100vh);
+  }
+
   .cta-design-clear {
     position: absolute;
     left: 0;

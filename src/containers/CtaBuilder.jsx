@@ -180,6 +180,7 @@ class CtaBuilder extends Component {
     };
 
     this.modal = React.createRef();
+    this.ExModal = React.createRef();
   }
 
   componentDidMount() {

@@ -34,27 +34,34 @@ class ExportTab extends Component {
   onDownloadImage = () => {
     let { modal } = this.props;
 
-    modal = modal.current;
+    modal = modal.current.cloneNode(true);
+    
 
-    modal.classList.add("for-fix");
+    const container = document.createElement("div");
+    container.classList.add("cta-design", "render", "preview");
+    const content = document.createElement("div");
+    content.classList.add("cta-content-container");
 
-    setTimeout(()=>{
-      modal.classList.remove("for-fix");
+    container.appendChild(content);
+    content.appendChild(modal);
 
-      modal.classList.add("for-render");
+    document.body.appendChild(container);
 
-      html2canvas(modal, { allowTaint: true, useCORS:true, scrollX:0, scrollY:0 })
-        .then(function (canvas) {
-          var link = document.createElement('a');
-          link.download = 'preview.png';
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-          modal.classList.remove("for-render");
-        })
-        .catch(function (error) {
-          console.error('oops, something went wrong!', error);
-        });
-    }, 100);
+    modal.classList.add("for-render");
+
+    html2canvas(modal, { allowTaint: true, useCORS: true})
+      .then(function (canvas) {
+        var link = document.createElement('a');
+        link.download = 'preview.png';
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        modal.classList.remove("for-render");
+        container.remove();
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+      });
+
   }
 
   onTabChange = (tab) => {
