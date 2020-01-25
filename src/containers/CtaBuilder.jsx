@@ -605,7 +605,7 @@ class CtaBuilder extends Component {
                 data={data}
                 onUpdate={this.onUpdate} />
             } />
-            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isCallToActionTab} toggle={this.toggle} name="isCallToActionTab" title="Call-to-action text" content={
+            <EditTab onClose={this.onCloseTabs} isHided={layoutName == LAYOUT_NAMES[2]} isActive={tabs.isCallToActionTab} toggle={this.toggle} name="isCallToActionTab" title="Headline" content={
               <CallToActionTab
                 data={data}
                 fontsList={fontsList}

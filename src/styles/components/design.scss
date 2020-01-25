@@ -555,7 +555,7 @@
       }
 
       .cta-content-unsubscribe {
-        display: block;
+        display: block !important;
         margin-bottom: $margin;
         line-height: 150%;
         font-size: inherit;
