@@ -96,7 +96,7 @@ class Header extends Component {
         <div className="cta-header-button">
           <a href={APP_CONFIG.helpCenter} target="_blank"><i className="icon-help-circle"></i></a>
           <div className="d-inline pos-r" data-tip={`${this.isExportDisabled() ? "Some elements not configued:" + this.getError() : ''}`} data-for='export-tooltip'>
-            <button className={`btn btn-special ${this.isExportDisabled() ? "disabled" : ''}`} onClick={() => { onExportToggle() }}>Export {layoutName == LAYOUT_NAMES[0] ? <span className="hide-md">& embed</span> : ''}</button>
+            <button className={`btn btn-special ${this.isExportDisabled() ? "disabled" : ''}`} onClick={() => { onExportToggle() }}>{layoutName == LAYOUT_NAMES[0] ? <div>Export <span className='hide-md'>& embed</span></div> : <div>Embed</div>}</button>
             <ReactTooltip id='export-tooltip' place="bottom" className="tolltip-basic tw-200" effect="solid" />
             <ToolTip isActive={isDesign && toolTips.isExportTooltip} text="All done? Get your embed instructions here." type="top-header" />
           </div>
