@@ -201,12 +201,15 @@ class CtaBuilder extends Component {
     switch (linkFromUrl[linkFromUrl.length - 1]) {
       case "image-only":
         this.setState({ layoutName: LAYOUT_NAMES[0] });
+        document.title = "SimpleTexting - Sign-Up Graphics";
         break;
       case "button-flyout":
         this.setState({ layoutName: LAYOUT_NAMES[1] });
+        document.title = "SimpleTexting - Mobile Sign-Up Widget";
         break;
       case "click-to-text":
         this.setState({ layoutName: LAYOUT_NAMES[2] });
+        document.title = "SimpleTexting - Click-to-Text Button";
         break;
       default:
         setTimeout(() => {
@@ -375,13 +378,16 @@ class CtaBuilder extends Component {
 
     switch (LAYOUT_NAMES[layout]) {
       case LAYOUT_NAMES[0]:
-        window.history.pushState({}, "", data.folder + "#image-only");
+        window.history.pushState({}, "SimpleTexting - Sign-Up Graphics", data.folder + "#image-only");
+        document.title = "SimpleTexting - Sign-Up Graphics";
         break;
       case LAYOUT_NAMES[1]:
-        window.history.pushState({}, "", data.folder + "#button-flyout");
+        window.history.pushState({}, "SimpleTexting - Mobile Sign-Up Widget", data.folder + "#button-flyout");
+        document.title = "SimpleTexting - Mobile Sign-Up Widget";
         break;
       case LAYOUT_NAMES[2]:
-        window.history.pushState({}, "", data.folder + "#click-to-text");
+        window.history.pushState({}, "SimpleTexting - Click-to-Text Button", data.folder + "#click-to-text");
+        document.title = "SimpleTexting - Click-to-Text Button";
         break;
       default:
 
