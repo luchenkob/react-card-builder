@@ -119,6 +119,7 @@
     left: 0;
     bottom: -60px;
     width: 100%;
+    pointer-events: all;
 
     .tolltip-basic {
       max-width: 140px;
@@ -908,7 +909,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 99999;
+  z-index: 9999;
+  pointer-events: none;
 }
 
 .d-none {
