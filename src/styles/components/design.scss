@@ -902,6 +902,12 @@
   }
 }
 
+.hide-desktop {
+  @media screen and (min-width:560px) {
+    display: none !important;
+  }
+}
+
 .cta-viewer {
   position: fixed;
   left: 0;

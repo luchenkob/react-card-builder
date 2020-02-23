@@ -290,7 +290,7 @@ class Preview extends Component {
             </div>
             <div className={`cta-trigger-button-container ${behavior.position}`}>
               {!isProduction ? <ToolTip isActive={!isDesign && this.ifTriggerButton() && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text={`${this.ifFlyoutButton() ? 'Click the trigger button to open the graphic you designed.' : 'Click the button to send your text.' }`} type="bottom-trigger" /> : ''}
-              <div className={`cta-btn-close cta-dropdown-toggler ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) || isModal ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
+              <div className={`cta-btn-close cta-dropdown-toggler ${(isDesktop && !behavior.displayOnDesktop) ? isProduction ? "hide-desktop" : 'd-none' : ''} ${(!isDesktop && !behavior.displayOnMobile) ? isProduction ? "hide-mobile" : "d-none" : ''} ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) || isModal ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
               <ReactTooltip id='dropdown' place="left" className="tolltip-basic" effect="solid" />
               <DropDown isOpen={isOpenDropDown} onClose={this.onCloseNot}>
                 <div className="cta-btn-close" onClick={this.onCloseNotification}><i className="icon-close"></i></div>
@@ -302,7 +302,7 @@ class Preview extends Component {
                   (
                     <div
                       onClick={this.onTrigger}
-                      className={`cta-content-button trigger ${(isDesktop && !behavior.displayOnDesktop) ? "d-none" : ''} ${(!isDesktop && !behavior.displayOnMobile) ? "d-none" : ''} ${data.triggerButtonType} ${data.triggerButtonAlign} ${(!data.triggerButtonLabel && !data.triggerButtonIcon) ? "disabled" : ''}`}
+                      className={`cta-content-button trigger ${(isDesktop && !behavior.displayOnDesktop) ? isProduction ? "hide-desktop" : "d-none" : ''} ${(!isDesktop && !behavior.displayOnMobile) ? isProduction ? "hide-mobile" : "d-none" : ''} ${data.triggerButtonType} ${data.triggerButtonAlign} ${(!data.triggerButtonLabel && !data.triggerButtonIcon) ? "disabled" : ''}`}
                       style={{
                         background: data.triggerButtonBackground,
                         color: data.triggerButtonFontColor,
