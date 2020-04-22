@@ -71,7 +71,7 @@ class ExportTab extends Component {
   buildCode = () => {
     const { data, behavior, layoutName } = this.props;
 
-    this.codeArea.current.value = "<script>\nvar ctaData;\n(function (d, l, i, h, s) {\nh = d.getElementsByTagName('head')[0];\ns = d.createElement('script');\ns.async = 1;\ns.src = l;\nctaData = i;\nh.appendChild(s);\n}(document, '" + data.folder + "assets/ctaviewer.js?v=0.1', '" + this.b64EncodeUnicode(JSON.stringify({ data: data, behavior: behavior, layoutName: layoutName })) + "'));\n</script>";
+    this.codeArea.current.value = "<script>\nvar ctaData;\n(function (d, l, i, h, s) {\nh = d.getElementsByTagName('head')[0];\ns = d.createElement('script');\ns.async = 1;\ns.src = l;\nctaData = i;\nh.appendChild(s);\n}(document, '" + data.folder + "assets/ctaviewer.js?v=1.0', '" + this.b64EncodeUnicode(JSON.stringify({ data: data, behavior: behavior, layoutName: layoutName })) + "'));\n</script>";
     autosize.update(this.codeArea.current);
     this.buildCodeLines();
     document.querySelector(".cta-builder-copy").classList.remove("disabled");

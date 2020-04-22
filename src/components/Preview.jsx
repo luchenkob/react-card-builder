@@ -288,7 +288,7 @@ class Preview extends Component {
               </div>
               {data.isPowered ? (<div className="cta-content-copyright"><a href="https://www.simpletexting.com" target="_blank">Powered by SimpleTexting.com</a></div>) : ''}
             </div>
-            <div className={`cta-trigger-button-container ${behavior.position}`}>
+            <div className={`cta-trigger-button-container ${this.ifTriggerButton() ? "hide-desktop" : ''} ${behavior.position}`}>
               {!isProduction ? <ToolTip isActive={!isDesign && this.ifTriggerButton() && toolTips.isTriggerButtonTooltip && (this.ifTriggerAvailable() || this.ifFlyoutAvailable())} text={`${this.ifFlyoutButton() ? 'Click the trigger button to open the graphic you designed.' : 'Click the button to send your text.' }`} type="bottom-trigger" /> : ''}
               <div className={`cta-btn-close cta-dropdown-toggler ${(isDesktop && !behavior.displayOnDesktop) ? isProduction ? "hide-desktop" : 'd-none' : ''} ${(!isDesktop && !behavior.displayOnMobile) ? isProduction ? "hide-mobile" : "d-none" : ''} ${(!this.ifTriggerAvailable() && !this.ifFlyoutAvailable()) || isModal ? "d-none" : ''} ${this.ifOnlyImage() ? "d-none" : ''}`} onClick={this.onCloseTriger}><i className="icon-close"></i></div>
               <ReactTooltip id='dropdown' place="left" className="tolltip-basic" effect="solid" />
