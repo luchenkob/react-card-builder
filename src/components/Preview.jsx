@@ -183,15 +183,18 @@ class Preview extends Component {
     return <div className={`cta-content-legal-links ${!validateEmail(data.email) ? "disabled" : ''}`} style={{ fontSize: data.complianceSize + "px", fontFamily: data.complianceFont, color: data.complianceColor, fontWeight: data.complianceWeight, fontStyle: data.complianceItalic}}><a target="_blank" href={url}>Terms & Privacy Policy Information</a></div>;
   }
 
+  detectIOS = () => {
+    return navigator.userAgent.match(/(iPad|iPhone|iPod)/g);
+  }
+
   generateSMSLink = () => {
     const { data } = this.props;
-    return "sms:" + data.phone + "&body=" + data.keyword;
-
+    return `sms:${data.phone}${this.detectIOS() ? "&" : ";"}body=${data.keyword}`;
   }
 
   generateSMSLinkContact = () => {
     const { data } = this.props;
-    return "sms:" + data.textUsButtonNumber + "&body=" + data.textUsButtonText;
+    return `sms:${data.textUsButtonNumber}${this.detectIOS() ? "&" : ";"}body=${data.textUsButtonText}`;
 
   }
 
