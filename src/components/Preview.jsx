@@ -184,7 +184,7 @@ class Preview extends Component {
   }
 
   detectIOS = () => {
-    return navigator.userAgent.match(/(iPad|iPhone|iPod)/g);
+    return navigator.userAgent.match(/(iPad|iPhone|iPod|Safari)/g);
   }
 
   generateSMSLink = () => {
