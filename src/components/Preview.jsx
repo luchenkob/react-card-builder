@@ -189,12 +189,12 @@ class Preview extends Component {
 
   generateSMSLink = () => {
     const { data } = this.props;
-    return `sms:${data.phone}${this.detectIOS() ? "&" : ";"}body=${data.keyword}`;
+    return `sms:${data.phone}?&body=${data.keyword.replace("", '%20')}`;
   }
 
   generateSMSLinkContact = () => {
     const { data } = this.props;
-    return `sms:${data.textUsButtonNumber}${this.detectIOS() ? "&" : ";"}body=${data.textUsButtonText}`;
+    return `sms:${data.textUsButtonNumber}?&body=${data.textUsButtonText.replace("", '%20')}`;
 
   }
 
